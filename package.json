@@ -7,7 +7,7 @@
     "dev:demopure": "webpack-dev-server --config ./demo-pure/webpack.config.js",
     "dev:demovue": "webpack-dev-server --config ./demo-vue/webpack.config.js",
     "dev:demorelationship": "webpack-dev-server --config ./demo-relationship/webpack.config.js",
-    "build:demorelationship":  "rm -rf docs/dist && export NODE_ENV=production && webpack --config ./demo-relationship/webpack.config.js && mv -f ./demo-relationship/dist ./docs"
+    "build:demorelationship":  "rm -rf docs/dist && export NODE_ENV=production && webpack --config ./demo-relationship/webpack.config.js && mv -f ./demo-relationship/dist/* ./docs/"
   },
   "author": "",
   "license": "ISC",
