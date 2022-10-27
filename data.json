@@ -1,0 +1,20 @@
+[
+    {
+        "name": "A" ,
+        "extends": "B",
+        "mixins": ["C", "D"]
+    },
+    {
+        "name": "B" ,
+        "implements": "E"
+    },
+    {
+        "name": "C" 
+    },
+    {
+        "name": "D" 
+    },
+    {
+        "name": "E" 
+    }
+]

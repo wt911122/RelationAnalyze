@@ -1,0 +1,5243 @@
+{
+	"logics": [
+		{
+			"name": "loadDashboardTableView1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadDashboardTableView1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"dashboard"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadDashboardTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "staffid"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "username"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadDashboardTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"dashboard"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFeedBackListGridView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Feedback",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFeedBackListGridViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FeedBackList"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFeedBackListSelectStaff",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFeedBackListSelectStaffStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FeedBackList"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFrontPageSelectStaff",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFrontPageSelectStaffStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyReportSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "name"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyReportSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyReport"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyApplicationRecordSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "name"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyApplicationRecordSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "name"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"NonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadloginStaff",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "username"
+				}
+			],
+			"return": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage",
+				"dashboard",
+				"CreateApplicationRecord",
+				"CreateNonApplicationRecord",
+				"CreateTrophyApplicationRecord",
+				"MyApplication",
+				"MyTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadApplicationRecordSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "name"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadApplicationRecordSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadPersonnelInformationTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadPersonnelInformationTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"PersonnelInformation"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "load1TableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.Load1TableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadApplication",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "applicationId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadApplicationStructure1>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"InventoryChanges"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadApplicationRecordSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadApplicationRecordSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadApplicationRecordTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadApplicationRecordTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadBulletin",
+			"param": [],
+			"return": [
+				{
+					"ref": "app.entities.Bulletin",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCheckBoundSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				},
+				{
+					"ref": "app.enums.Category",
+					"name": "categories"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCheckBoundSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CheckBound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCheckBoundSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "app.enums.Category",
+					"name": "category"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCheckBoundSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CheckBound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCheckBoundTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.StockManage",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCheckBoundTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CheckBound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsSelectCostCenter1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsSelectCostCenter1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsSelectCostCenter2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsSelectCostCenter2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsSelectCostCenter3",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsSelectCostCenter3Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsSelectCostCenter4",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsSelectCostCenter4Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsSelectCostCenter5",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsSelectCostCenter5Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadCostCenterDetailsTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "firstID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCostCenterDetailsTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FirstCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateApplicationRecordSelectCostCenter1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateApplicationRecordSelectCostCenter1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateApplicationRecordSelectCostCenter2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "firstID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateApplicationRecordSelectCostCenter2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateApplicationRecordSelectCostCenter3",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "secondID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateApplicationRecordSelectCostCenter3Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateApplicationRecordSelectCostCenter4",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "thirdID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateApplicationRecordSelectCostCenter4Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateApplicationRecordSelectCostCenter5",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "fourthID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateApplicationRecordSelectCostCenter5Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateApplicationRecordSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateApplicationRecordSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonApplicationRecordSelectCostCenter1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonApplicationRecordSelectCostCenter1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonApplicationRecordSelectCostCenter2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "firstID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonApplicationRecordSelectCostCenter2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonApplicationRecordSelectCostCenter3",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "secondID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonApplicationRecordSelectCostCenter3Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonApplicationRecordSelectCostCenter4",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "thirdID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonApplicationRecordSelectCostCenter4Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonApplicationRecordSelectCostCenter5",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "fourID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonApplicationRecordSelectCostCenter5Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonApplicationRecordSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				},
+				{
+					"ref": "app.enums.ProductAttributes",
+					"name": "productAttributes"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonApplicationRecordSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateNonProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateNonProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophyApplicationRecordSelectCostCenter1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophyApplicationRecordSelectCostCenter1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophyApplicationRecordSelectCostCenter2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "firstID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophyApplicationRecordSelectCostCenter2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophyApplicationRecordSelectCostCenter3",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "secondID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophyApplicationRecordSelectCostCenter3Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophyApplicationRecordSelectCostCenter4",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "thirdID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophyApplicationRecordSelectCostCenter4Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophyApplicationRecordSelectCostCenter5",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "fourthID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophyApplicationRecordSelectCostCenter5Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophyApplicationRecordSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				},
+				{
+					"ref": "app.enums.ProductLine",
+					"name": "ProductLine"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophyApplicationRecordSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCreateTrophySelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCreateTrophySelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCustProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCustProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadCustProductTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadCustProductTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFifthCostCenterDetailsTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "fifthID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFifthCostCenterDetailsTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FifthCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFifthCostCenterSelectCostCenter4",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFifthCostCenterSelectCostCenter4Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FifthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFifthCostCenterTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFifthCostCenterTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FifthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFirstCostCenterTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFirstCostCenterTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FirstCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFourthCostCenterDetailsTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "fourthID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFourthCostCenterDetailsTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FourthCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFourthCostCenterSelectCostCenter3",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFourthCostCenterSelectCostCenter3Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FourthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadFourthCostCenterTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "ThirdID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadFourthCostCenterTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FourthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadInboundSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "app.enums.Category",
+					"name": "category"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadInboundSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Inbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadInboundSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "app.enums.Category",
+					"name": "category"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadInboundSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Inbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadInboundTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.StockManage",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadInboundTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Inbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyApplicationSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyApplicationSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyApplicationSelectProduct1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyApplicationSelectProduct1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyApplicationSelectProduct2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyApplicationSelectProduct2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyApplicationTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "username1"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "staffid"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyApplicationTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyApplicationTableView1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "username1"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "staffid"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyApplicationTableView1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyApplicationTableView2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "username1"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "staffid"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyApplicationTableView2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadMyTrophyTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.TrophyReport",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadMyTrophyTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"MyTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelectCostCenter1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectCostCenter1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelectCostCenter2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "firstID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectCostCenter2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelectCostCenter3",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectCostCenter3Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelectCostCenter4",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectCostCenter4Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelectCostCenter5",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectCostCenter5Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"NonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonApplicationRecordTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonApplicationRecordTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"NonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonCustProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonCustProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"NonCustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadNonCustProductTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadNonCustProductTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"NonCustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadOutboundSelect",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "app.enums.Category",
+					"name": "category"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadOutboundSelectStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadOutboundSelectProduct",
+			"param": [
+				{
+					"ref": "app.enums.Category",
+					"name": "category"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadOutboundSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadOutboundTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.StockManage",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadOutboundTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProduct1",
+			"param": [],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.structures.LoadProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductBZ",
+			"param": [
+				{
+					"ref": "app.enums.ProductAttributes",
+					"name": "ProductAttributes"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.structures.LoadProductAllStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductCode",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "ProductCode"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadProductCodeStructure1>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CreateNonProduct",
+				"CreateProduct",
+				"CreateTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductDZ",
+			"param": [],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.structures.LoadProductDZStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductJBZS",
+			"param": [
+				{
+					"ref": "app.enums.ProductLine",
+					"name": "ProductLine"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.structures.LoadProductJBZSStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadProductTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Product"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductTableView1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadProductTableView1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Product"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadProductTableView2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadProductTableView2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Product"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadQuickOutSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "app.enums.Category",
+					"name": "category"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "productid"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadQuickOutSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"QuickOut"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadSecondCostCenterDetailsTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "secondID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadSecondCostCenterDetailsTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"SecondCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadSecondCostCenterSelectCostCenter1",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadSecondCostCenterSelectCostCenter1Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"SecondCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadSecondCostCenterTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "firstID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadSecondCostCenterTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"SecondCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadStorehouseTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadStorehouseTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"Storehouse"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadThirdCostCenterDetailsTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "thirdID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadThirdCostCenterDetailsTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ThirdCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadThirdCostCenterSelectCostCenter2",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadThirdCostCenterSelectCostCenter2Structure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ThirdCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadThirdCostCenterTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "filter"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "SecID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadThirdCostCenterTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ThirdCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyApplicationRecordSelectProduct",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "productName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyApplicationRecordSelectProductStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyApplicationRecordTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyApplicationRecordTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyProductTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyProductTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadTrophyReportTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.entities.TrophyReport",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadTrophyReportTableViewStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"TrophyReport"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadUpdateNonProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadUpdateNonProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"UpdateNonProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadUpdateProductSelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadUpdateProductSelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"UpdateProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadUpdateTrophySelectStorehouse",
+			"param": [
+				{
+					"ref": "nasl.core.Integer",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Integer",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadUpdateTrophySelectStorehouseStructure>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"UpdateTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadcostcenter",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "ApplicationID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.Interface1Structure1>",
+					"name": "pageofloadcost"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ApplicationDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadnumber",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "id"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadnumberStructure1>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"QuickOut"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadproduct",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "productId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadproductStructure1>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"CheckBound",
+				"Inbound",
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadproductkind",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "productID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadproductkindStructure1>",
+					"name": "pageofloadproductkind"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"ApplicationDetails",
+				"CreateApplicationRecord",
+				"CreateNonApplicationRecord",
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "loadstockproduct",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "productID"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.PageOf<app.structures.LoadstockproductStructure1>",
+					"name": "pageofloadstockproduct"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [
+				"InventoryChanges"
+			],
+			"refByOther": []
+		},
+		{
+			"name": "randomCode",
+			"param": [],
+			"return": [
+				{
+					"ref": "nasl.core.String",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByOther": []
+		}
+	],
+	"structures": [
+		{
+			"structure": "LoadDashboardTableView1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadDashboardTableView1"
+			],
+			"refByView": [
+				"dashboard"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadDashboardTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadDashboardTableView"
+			],
+			"refByView": [
+				"dashboard"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFeedBackListGridViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Feedback",
+					"name": "feedback"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadFeedBackListGridView"
+			],
+			"refByView": [
+				"FeedBackList"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFeedBackListSelectStaffStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadFeedBackListSelectStaff"
+			],
+			"refByView": [
+				"FeedBackList"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFrontPageSelectStaffStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadFrontPageSelectStaff"
+			],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyReportSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyReportSelect"
+			],
+			"refByView": [
+				"TrophyReport"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyApplicationRecordSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyApplicationRecordSelect"
+			],
+			"refByView": [
+				"TrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelect"
+			],
+			"refByView": [
+				"NonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadloginStaffStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadloginStaff"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadApplicationRecordSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadApplicationRecordSelect"
+			],
+			"refByView": [
+				"ApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadPersonnelInformationTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadPersonnelInformationTableView"
+			],
+			"refByView": [
+				"PersonnelInformation"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "Interface1Structure1",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadcostcenter"
+			],
+			"refByView": [
+				"ApplicationDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "Load1TableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"load1TableView"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadApplicationRecordSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadApplicationRecordSelectProduct"
+			],
+			"refByView": [
+				"ApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadApplicationRecordTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadApplicationRecordTableView"
+			],
+			"refByView": [
+				"ApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadApplicationStructure1",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				}
+			],
+			"refByLogic": [
+				"loadApplication"
+			],
+			"refByView": [
+				"InventoryChanges"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadBulletinStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Bulletin",
+					"name": "bulletin"
+				}
+			],
+			"refByLogic": [
+				"loadBulletin"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCheckBoundSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadCheckBoundSelectProduct"
+			],
+			"refByView": [
+				"CheckBound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCheckBoundSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadCheckBoundSelect"
+			],
+			"refByView": [
+				"CheckBound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCheckBoundTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.StockManage",
+					"name": "stockManage"
+				}
+			],
+			"refByLogic": [
+				"loadCheckBoundTableView"
+			],
+			"refByView": [
+				"CheckBound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsSelectCostCenter1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsSelectCostCenter1"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsSelectCostCenter2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsSelectCostCenter2"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsSelectCostCenter3Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsSelectCostCenter3"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsSelectCostCenter4Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsSelectCostCenter4"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsSelectCostCenter5Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsSelectCostCenter5"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsSelectProduct"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCostCenterDetailsTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadCostCenterDetailsTableView"
+			],
+			"refByView": [
+				"FirstCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateApplicationRecordSelectCostCenter1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadCreateApplicationRecordSelectCostCenter1"
+			],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateApplicationRecordSelectCostCenter2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadCreateApplicationRecordSelectCostCenter2"
+			],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateApplicationRecordSelectCostCenter3Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadCreateApplicationRecordSelectCostCenter3"
+			],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateApplicationRecordSelectCostCenter4Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				}
+			],
+			"refByLogic": [
+				"loadCreateApplicationRecordSelectCostCenter4"
+			],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateApplicationRecordSelectCostCenter5Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"loadCreateApplicationRecordSelectCostCenter5"
+			],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateApplicationRecordSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadCreateApplicationRecordSelectProduct"
+			],
+			"refByView": [
+				"CreateApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonApplicationRecordSelectCostCenter1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonApplicationRecordSelectCostCenter1"
+			],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonApplicationRecordSelectCostCenter2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonApplicationRecordSelectCostCenter2"
+			],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonApplicationRecordSelectCostCenter3Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonApplicationRecordSelectCostCenter3"
+			],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonApplicationRecordSelectCostCenter4Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonApplicationRecordSelectCostCenter4"
+			],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonApplicationRecordSelectCostCenter5Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonApplicationRecordSelectCostCenter5"
+			],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonApplicationRecordSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonApplicationRecordSelectProduct"
+			],
+			"refByView": [
+				"CreateNonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateNonProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadCreateNonProductSelectStorehouse"
+			],
+			"refByView": [
+				"CreateNonProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadCreateProductSelectStorehouse"
+			],
+			"refByView": [
+				"CreateProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophyApplicationRecordSelectCostCenter1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophyApplicationRecordSelectCostCenter1"
+			],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophyApplicationRecordSelectCostCenter2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophyApplicationRecordSelectCostCenter2"
+			],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophyApplicationRecordSelectCostCenter3Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophyApplicationRecordSelectCostCenter3"
+			],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophyApplicationRecordSelectCostCenter4Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophyApplicationRecordSelectCostCenter4"
+			],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophyApplicationRecordSelectCostCenter5Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophyApplicationRecordSelectCostCenter5"
+			],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophyApplicationRecordSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophyApplicationRecordSelectProduct"
+			],
+			"refByView": [
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCreateTrophySelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadCreateTrophySelectStorehouse"
+			],
+			"refByView": [
+				"CreateTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCustProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadCustProductSelectStorehouse"
+			],
+			"refByView": [
+				"CustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadCustProductTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadCustProductTableView"
+			],
+			"refByView": [
+				"CustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFifthCostCenterDetailsTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadFifthCostCenterDetailsTableView"
+			],
+			"refByView": [
+				"FifthCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFifthCostCenterSelectCostCenter4Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				}
+			],
+			"refByLogic": [
+				"loadFifthCostCenterSelectCostCenter4"
+			],
+			"refByView": [
+				"FifthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFifthCostCenterTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"loadFifthCostCenterTableView"
+			],
+			"refByView": [
+				"FifthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFirstCostCenterTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadFirstCostCenterTableView"
+			],
+			"refByView": [
+				"FirstCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFourthCostCenterDetailsTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadFourthCostCenterDetailsTableView"
+			],
+			"refByView": [
+				"FourthCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFourthCostCenterSelectCostCenter3Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadFourthCostCenterSelectCostCenter3"
+			],
+			"refByView": [
+				"FourthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadFourthCostCenterTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadFourthCostCenterTableView"
+			],
+			"refByView": [
+				"FourthCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadInboundSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadInboundSelectProduct"
+			],
+			"refByView": [
+				"Inbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadInboundSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadInboundSelect"
+			],
+			"refByView": [
+				"Inbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadInboundTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.StockManage",
+					"name": "stockManage"
+				}
+			],
+			"refByLogic": [
+				"loadInboundTableView"
+			],
+			"refByView": [
+				"Inbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyApplicationSelectProduct1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadMyApplicationSelectProduct1"
+			],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyApplicationSelectProduct2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadMyApplicationSelectProduct2"
+			],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyApplicationSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadMyApplicationSelectProduct"
+			],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyApplicationTableView1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadMyApplicationTableView1"
+			],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyApplicationTableView2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadMyApplicationTableView2"
+			],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyApplicationTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadMyApplicationTableView"
+			],
+			"refByView": [
+				"MyApplication"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadMyTrophyTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.TrophyReport",
+					"name": "trophyReport"
+				}
+			],
+			"refByLogic": [
+				"loadMyTrophyTableView"
+			],
+			"refByView": [
+				"MyTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectCostCenter1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelectCostCenter1"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectCostCenter2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelectCostCenter2"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectCostCenter3Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelectCostCenter3"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectCostCenter4Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelectCostCenter4"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectCostCenter5Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelectCostCenter5"
+			],
+			"refByView": [],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordSelectProduct"
+			],
+			"refByView": [
+				"NonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonApplicationRecordTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadNonApplicationRecordTableView"
+			],
+			"refByView": [
+				"NonApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonCustProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadNonCustProductSelectStorehouse"
+			],
+			"refByView": [
+				"NonCustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadNonCustProductTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadNonCustProductTableView"
+			],
+			"refByView": [
+				"NonCustProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadOutboundSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadOutboundSelectProduct"
+			],
+			"refByView": [
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadOutboundSelectStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadOutboundSelect"
+			],
+			"refByView": [
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadOutboundTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.StockManage",
+					"name": "stockManage"
+				}
+			],
+			"refByLogic": [
+				"loadOutboundTableView"
+			],
+			"refByView": [
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductAllStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadProductBZ"
+			],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductCodeStructure1",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadProductCode"
+			],
+			"refByView": [
+				"CreateNonProduct",
+				"CreateProduct",
+				"CreateTrophy",
+				"UpdateNonProduct",
+				"UpdateProduct",
+				"UpdateTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductDZStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadProductDZ"
+			],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductJBZSStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadProductJBZS"
+			],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadProduct1"
+			],
+			"refByView": [
+				"FrontPage"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductTableView1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadProductTableView1"
+			],
+			"refByView": [
+				"Product"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductTableView2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadProductTableView2"
+			],
+			"refByView": [
+				"Product"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadProductTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadProductTableView"
+			],
+			"refByView": [
+				"Product"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadQuickOutSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadQuickOutSelectProduct"
+			],
+			"refByView": [
+				"QuickOut"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadSecondCostCenterDetailsTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadSecondCostCenterDetailsTableView"
+			],
+			"refByView": [
+				"SecondCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadSecondCostCenterSelectCostCenter1Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				}
+			],
+			"refByLogic": [
+				"loadSecondCostCenterSelectCostCenter1"
+			],
+			"refByView": [
+				"SecondCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadSecondCostCenterTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadSecondCostCenterTableView"
+			],
+			"refByView": [
+				"SecondCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadStorehouseTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadStorehouseTableView"
+			],
+			"refByView": [
+				"Storehouse"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadThirdCostCenterDetailsTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadThirdCostCenterDetailsTableView"
+			],
+			"refByView": [
+				"ThirdCostCenterDetails"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadThirdCostCenterSelectCostCenter2Structure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				}
+			],
+			"refByLogic": [
+				"loadThirdCostCenterSelectCostCenter2"
+			],
+			"refByView": [
+				"ThirdCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadThirdCostCenterTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				}
+			],
+			"refByLogic": [
+				"loadThirdCostCenterTableView"
+			],
+			"refByView": [
+				"ThirdCostCenter"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyApplicationRecordSelectProductStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyApplicationRecordSelectProduct"
+			],
+			"refByView": [
+				"TrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyApplicationRecordTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.ApplicationRecord",
+					"name": "applicationRecord"
+				},
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.CostCenter1",
+					"name": "costCenter1"
+				},
+				{
+					"ref": "app.entities.CostCenter2",
+					"name": "costCenter2"
+				},
+				{
+					"ref": "app.entities.CostCenter3",
+					"name": "costCenter3"
+				},
+				{
+					"ref": "app.entities.CostCenter4",
+					"name": "costCenter4"
+				},
+				{
+					"ref": "app.entities.CostCenter5",
+					"name": "costCenter5"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyApplicationRecordTableView"
+			],
+			"refByView": [
+				"TrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyProductSelectStorehouse"
+			],
+			"refByView": [
+				"TrophyProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyProductTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				},
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyProductTableView"
+			],
+			"refByView": [
+				"TrophyProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadTrophyReportTableViewStructure",
+			"properties": [
+				{
+					"ref": "app.entities.TrophyReport",
+					"name": "trophyReport"
+				},
+				{
+					"ref": "app.entities.Staff",
+					"name": "staff"
+				}
+			],
+			"refByLogic": [
+				"loadTrophyReportTableView"
+			],
+			"refByView": [
+				"TrophyReport"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadUpdateNonProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadUpdateNonProductSelectStorehouse"
+			],
+			"refByView": [
+				"UpdateNonProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadUpdateProductSelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadUpdateProductSelectStorehouse"
+			],
+			"refByView": [
+				"UpdateProduct"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadUpdateTrophySelectStorehouseStructure",
+			"properties": [
+				{
+					"ref": "app.entities.Storehouse",
+					"name": "storehouse"
+				}
+			],
+			"refByLogic": [
+				"loadUpdateTrophySelectStorehouse"
+			],
+			"refByView": [
+				"UpdateTrophy"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadnumberStructure1",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadnumber"
+			],
+			"refByView": [
+				"QuickOut"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadproductStructure1",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadproduct"
+			],
+			"refByView": [
+				"CheckBound",
+				"Inbound",
+				"Outbound"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadproductkindStructure1",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadproductkind"
+			],
+			"refByView": [
+				"ApplicationDetails",
+				"CreateApplicationRecord",
+				"CreateNonApplicationRecord",
+				"CreateTrophyApplicationRecord"
+			],
+			"refByOther": []
+		},
+		{
+			"structure": "LoadstockproductStructure1",
+			"properties": [
+				{
+					"ref": "app.entities.Product",
+					"name": "product"
+				}
+			],
+			"refByLogic": [
+				"loadstockproduct"
+			],
+			"refByView": [
+				"InventoryChanges"
+			],
+			"refByOther": []
+		}
+	]
+}

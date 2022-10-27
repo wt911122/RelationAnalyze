@@ -1,0 +1,26 @@
+{
+  "name": "jflowdemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "demo-layout.js",
+  "scripts": {
+    "dev:demopure": "webpack-dev-server --config ./demo-pure/webpack.config.js",
+    "dev:demovue": "webpack-dev-server --config ./demo-vue/webpack.config.js",
+    "dev:demorelationship": "webpack-dev-server --config ./demo-relationship/webpack.config.js",
+    "build:demorelationship":  "rm -rf docs/dist && export NODE_ENV=production && webpack --config ./demo-relationship/webpack.config.js && mv -f ./demo-relationship/dist ./docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "vue-loader": "^15.0.0",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "@joskii/jflow": "^0.0.97-beta",
+    "vue": "^2.6.11"
+  }
+}
