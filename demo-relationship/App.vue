@@ -55,6 +55,8 @@
         <div>
             <button @click="$refs.scriptdialog.showModal()">get script</button>
             <button @click="importData">import data</button> 
+            <span>{{ statistics }}</span>
+            <br />
             <!-- <select @change="onChange">
                 <option v-for="op in options"
                     :value="op.value" 
@@ -232,6 +234,14 @@ export default {
             //     { text: '问卷', value: '3', data: Object.freeze(DATA3) },
             // ]
         };
+    },
+    computed: {
+        statistics() {
+            if(this.curData) {
+                return `entities: ${this.curData.entities.length}, structures: ${this.curData.struts.length}, logics: ${this.curData.logics.length}, views: ${this.curData.views.length}`
+            }
+            return ''
+        }
     },
     methods: {
         // onChange(event) {
