@@ -13,7 +13,7 @@
         <j-group :configs="bodyConfigs">
             <j-group :configs="propertyConfig">
                 <template v-if="node.properties && node.properties.length">
-                    <er-property v-for="(property, idx) in node.properties" :node="property" :key="property.name"></er-property>
+                    <er-property v-for="(property) in node.properties" :node="property" :key="property.name"></er-property>
                 </template>
                 <template v-if="node.param && node.param.length">
                     <j-text
@@ -23,7 +23,7 @@
                         textAlign: 'left',
                         content: 'params:'
                     }"></j-text>
-                    <er-property v-for="(property, idx) in node.param" :node="property" :key="property.name"></er-property>
+                    <er-property v-for="(property) in node.param" :node="property" :key="property.name"></er-property>
                 </template>
                 <template v-if="node.return && node.return.length">
                     <j-text
@@ -33,7 +33,7 @@
                         textAlign: 'left',
                         content: 'returns:'
                     }"></j-text>
-                    <er-property v-for="(property, idx) in node.return" :node="property" :key="property.name"></er-property>
+                    <er-property v-for="(property) in node.return" :node="property" :key="property.name"></er-property>
                 </template>
             </j-group>
         </j-group>

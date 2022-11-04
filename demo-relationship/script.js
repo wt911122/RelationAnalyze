@@ -1,6 +1,7 @@
 function figureOutRefs(result) {
     const refByLogic = [];
     const refByView = [];
+    const refByViewLogic = [];
     const refByOther = [];
     for (const entry of result) {
         const n = entry[0];
@@ -14,9 +15,14 @@ function figureOutRefs(result) {
                 function iterate(node, lastName) {
                     node.children.forEach(c => {
                         if(c.node.concept === 'View') {
-                            iterate(c, c.node.name);
+                            iterate(c, `${lastName}/${c.node.name}`);
                         } else {
-                            if(lastName) {
+                            if(c.node.concept === 'Logic') {
+                                refByViewLogic.push({
+                                    view: lastName,
+                                    logic: c.node.name,
+                                })
+                            } else if(lastName) {
                                 refByView.push(lastName)
                             }
                         }
@@ -32,6 +38,7 @@ function figureOutRefs(result) {
         refByLogic,
         refByView,
         refByOther,
+        refByViewLogic,
     }
 }
 Promise.all([
@@ -41,6 +48,7 @@ Promise.all([
             refByLogic,
             refByView,
             refByOther,
+            refByViewLogic
         } = figureOutRefs(result);
 
         return {
@@ -55,6 +63,7 @@ Promise.all([
             })),
             refByLogic:  Array.from(new Set(refByLogic)),
             refByView: Array.from(new Set(refByView)),
+            refByViewLogic,
             refByOther
         }
     })).then(res => {
@@ -65,6 +74,7 @@ Promise.all([
         const {
             refByLogic,
             refByView,
+            refByViewLogic,
             refByOther,
         } = figureOutRefs(result);
         
@@ -78,11 +88,36 @@ Promise.all([
             }),
             refByLogic,
             refByView: Array.from(new Set(refByView)),
+            refByViewLogic,
             refByOther
         }
     })).then(res => {
         return res
-    })
-]).then(([logics, structures]) => {
-    console.log(JSON.stringify({ logics, structures }, null, '\t'));
+    }),
+    Promise.resolve($data.app.views.map(v => {
+        const viewNames = [];
+        function iterate(viewNode, lastName) {
+            viewNames.push({
+                name: lastName,
+                logics: viewNode.logics.map(l => ({
+                    name: l.name,
+                    param: l.params.map(p => ({
+                        ref: p.typeAnnotation.typeKey,
+                        name: p.name,
+                    })),
+                    return: l.returns.map(p => ({
+                        ref: p.typeAnnotation.typeKey,
+                        name: p.name,
+                    }))
+                })),   
+            });
+            viewNode.children.forEach(c => {
+                iterate(c, `${lastName}/${c.name}`);
+            })
+        }
+        iterate(v, v.name);
+        return viewNames;
+    }).reduce((accu, curr) => accu.concat(curr), []))
+]).then(([logics, structures, views]) => {
+    console.log(JSON.stringify({ logics, structures, views }, null, '\t'));
 })

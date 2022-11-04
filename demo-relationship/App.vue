@@ -4,6 +4,13 @@
     border: 1px solid #000;
     overflow: visible;
     position: relative;">
+    <div style="position:absolute; left: 20px; top: 10px;">
+        <span class="legend entity">Entity</span>
+        <span class="legend structure">Structure</span>
+        <span class="legend globallogic">GlobalLogic</span>
+        <span class="legend viewlogic">ViewLogic</span>
+        <span class="legend view">View</span>
+    </div>
         <div style="display: block;
         width: 100%; height: 100%;">
         <j-jflow
@@ -13,6 +20,16 @@
             :configs="configs"
             :gen-vue-component-key="genVueComponentKey">
             <template #Structure="{ source }">
+                <j-er-node-comp
+                    v-if="showProperty"
+                    :node="source">
+                </j-er-node-comp>
+                <j-plain-node
+                    v-else
+                    :node="source">
+                </j-plain-node>
+            </template>
+            <template #ViewLogic="{ source }">
                 <j-er-node-comp
                     v-if="showProperty"
                     :node="source">
@@ -68,16 +85,17 @@
             <button @click="toggleView">toggle View ({{ configs.layout.viewVisible }})</button>
             <button @click="toggleLogic">toggle Logic ({{ configs.layout.logicVisible }})</button>
             <button @click="toggleStructure">toggle Sturcture ({{ configs.layout.structureVisible }})</button>
-            <button @click="toggleLcap">toggle LCAP ({{ configs.layout.LCAPvisible }})</button>
-            <button @click="toggleFilterMultiRef">toggle multiRef Filter ({{ configs.layout.multiRefFilter }})</button>
-            <button @click="toggleFilterMultiRefLogic">toggle multiRef Logic Filter ({{ configs.layout.multiLogicRefFilter }})</button>
-            <button @click="togglePrimary">toggle Primary Filter ({{ configs.layout.primaryFilter }})</button>
+            <!-- <button @click="toggleLcap">toggle LCAP ({{ configs.layout.LCAPvisible }})</button> -->
+            <!-- <button @click="toggleFilterMultiRef">toggle multiRef Filter ({{ configs.layout.multiRefFilter }})</button> -->
+            <!-- <button @click="toggleFilterMultiRefLogic">toggle multiRef Logic Filter ({{ configs.layout.multiLogicRefFilter }})</button> -->
+            <!-- <button @click="togglePrimary">toggle Primary Filter ({{ configs.layout.primaryFilter }})</button> -->
            <br>
             <label>
                 filterBy: <input v-model="filterContent" /> 
-                <button @click="doFilter('structure')">Struture</button>
-                <button @click="doFilter('logic')">Logic</button>
-                <button @click="doFilter('view')">View</button>
+                <button @click="doFilter('Structure')">Struture</button>
+                <button @click="doFilter('Logic')">Logic</button>
+                <button @click="doFilter('ViewLogic')">ViewLogic</button>
+                <button @click="doFilter('View')">View</button>
             </label>
             <button @click="toggleProperty">toggle property ({{ showProperty }})</button>
         </div>
@@ -98,94 +116,129 @@
         <dialog ref="scriptdialog">
             <form method="dialog">
             <textarea style="white-space: pre;width: 600px; height:400px">
-                function figureOutRefs(result) {
-                    const refByLogic = [];
-                    const refByView = [];
-                    const refByOther = [];
-                    for (const entry of result) {
-                        const n = entry[0];
-                        
-                        switch(n.concept) {
-                            case 'Logic': 
-                                refByLogic.push(entry[0].name);
-                                break;
-                            case 'View':
-                                let v = entry[1];
-                                function iterate(node, lastName) {
-                                    node.children.forEach(c => {
-                                        if(c.node.concept === 'View') {
-                                            iterate(c, c.node.name);
-                                        } else {
-                                            if(lastName) {
-                                                refByView.push(lastName)
-                                            }
-                                        }
-                                    })
-                                }
-                                iterate(v, v.node.name);
-                                break;
-                            default: 
-                                refByOther.push(entry[0].name);
+function figureOutRefs(result) {
+    const refByLogic = [];
+    const refByView = [];
+    const refByViewLogic = [];
+    const refByOther = [];
+    for (const entry of result) {
+        const n = entry[0];
+        
+        switch(n.concept) {
+            case 'Logic': 
+                refByLogic.push(entry[0].name);
+                break;
+            case 'View':
+                let v = entry[1];
+                function iterate(node, lastName) {
+                    node.children.forEach(c => {
+                        if(c.node.concept === 'View') {
+                            iterate(c, `${lastName}/${c.node.name}`);
+                        } else {
+                            if(c.node.concept === 'Logic') {
+                                refByViewLogic.push({
+                                    view: lastName,
+                                    logic: c.node.name,
+                                })
+                            } else if(lastName) {
+                                refByView.push(lastName)
+                            }
                         }
-                    }
-                    return {
-                        refByLogic,
-                        refByView,
-                        refByOther,
-                    }
-                }
-                Promise.all([
-                    Promise.all($data.app.logics.map(async s => { 
-                        const result = await window.globalData.naslServer.findReferences(s);
-                        const {
-                            refByLogic,
-                            refByView,
-                            refByOther,
-                        } = figureOutRefs(result);
-
-                        return {
-                            name: s.name,
-                            param: s.params.map(p => ({
-                                ref: p.typeAnnotation.typeKey,
-                                name: p.name,
-                            })),
-                            return: s.returns.map(p => ({
-                                ref: p.typeAnnotation.typeKey,
-                                name: p.name,
-                            })),
-                            refByLogic:  Array.from(new Set(refByLogic)),
-                            refByView: Array.from(new Set(refByView)),
-                            refByOther
-                        }
-                    })).then(res => {
-                        return res
-                    }),
-                    Promise.all($data.app.structures.map(async s => { 
-                        const result = await window.globalData.naslServer.findReferences(s);
-                        const {
-                            refByLogic,
-                            refByView,
-                            refByOther,
-                        } = figureOutRefs(result);
-                        
-                        return {
-                            structure: s.name,
-                            properties: s.properties.map(p => {
-                                return {
-                                    ref: p.typeAnnotation.typeKey,
-                                    name: p.name
-                                }
-                            }),
-                            refByLogic,
-                            refByView: Array.from(new Set(refByView)),
-                            refByOther
-                        }
-                    })).then(res => {
-                        return res
                     })
-                ]).then(([logics, structures]) => {
-                    console.log(JSON.stringify({ logics, structures }, null, '\t'));
-                })
+                }
+                iterate(v, v.node.name);
+                break;
+            default: 
+                refByOther.push(entry[0].name);
+        }
+    }
+    return {
+        refByLogic,
+        refByView,
+        refByOther,
+        refByViewLogic,
+    }
+}
+Promise.all([
+    Promise.all($data.app.logics.map(async s => { 
+        const result = await window.globalData.naslServer.findReferences(s);
+        const {
+            refByLogic,
+            refByView,
+            refByOther,
+            refByViewLogic
+        } = figureOutRefs(result);
+
+        return {
+            name: s.name,
+            param: s.params.map(p => ({
+                ref: p.typeAnnotation.typeKey,
+                name: p.name,
+            })),
+            return: s.returns.map(p => ({
+                ref: p.typeAnnotation.typeKey,
+                name: p.name,
+            })),
+            refByLogic:  Array.from(new Set(refByLogic)),
+            refByView: Array.from(new Set(refByView)),
+            refByViewLogic,
+            refByOther
+        }
+    })).then(res => {
+        return res
+    }),
+    Promise.all($data.app.structures.map(async s => { 
+        const result = await window.globalData.naslServer.findReferences(s);
+        const {
+            refByLogic,
+            refByView,
+            refByViewLogic,
+            refByOther,
+        } = figureOutRefs(result);
+        
+        return {
+            structure: s.name,
+            properties: s.properties.map(p => {
+                return {
+                    ref: p.typeAnnotation.typeKey,
+                    name: p.name
+                }
+            }),
+            refByLogic,
+            refByView: Array.from(new Set(refByView)),
+            refByViewLogic,
+            refByOther
+        }
+    })).then(res => {
+        return res
+    }),
+    Promise.resolve($data.app.views.map(v => {
+        const viewNames = [];
+        function iterate(viewNode, lastName) {
+            viewNames.push({
+                name: lastName,
+                logics: viewNode.logics.map(l => ({
+                    name: l.name,
+                    param: l.params.map(p => ({
+                        ref: p.typeAnnotation.typeKey,
+                        name: p.name,
+                    })),
+                    return: l.returns.map(p => ({
+                        ref: p.typeAnnotation.typeKey,
+                        name: p.name,
+                    }))
+                })),   
+            });
+            viewNode.children.forEach(c => {
+                iterate(c, `${lastName}/${c.name}`);
+            })
+        }
+        iterate(v, v.name);
+        return viewNames;
+    }).reduce((accu, curr) => accu.concat(curr), []))
+]).then(([logics, structures, views]) => {
+    console.log(JSON.stringify({ logics, structures, views }, null, '\t'));
+})
             </textarea>
             <button value="cancel">close</button>
             </form>
@@ -196,12 +249,13 @@
 <script>
 import erNodeComp from './components/er-node.vue';
 import plainNode from './components/plain-node.vue';
-import ERLayout from './layout/er-layout';
-// import data1 from './relations-youdata.json';
+import ERLayout from './layout/er-layout2';
+// import data1 from './relations-devops.json';
 // import data2 from './relations-jiaolian.json';
 // import data3 from './relations-wenjuan.json';
 // import data4 from './relations-zichan.json';
 import { createRelataion } from './relation';
+// const DATA1 = createRelataion(data1);
 // const DATA1 = createRelataion(data1);
 // const DATA2 = createRelataion(data2);
 // const DATA3 = createRelataion(data3);
@@ -238,11 +292,20 @@ export default {
     computed: {
         statistics() {
             if(this.curData) {
-                return `entities: ${this.curData.entities.length}, structures: ${this.curData.struts.length}, logics: ${this.curData.logics.length}, views: ${this.curData.views.length}`
+                return `entities: ${this.curData.entities.length}, structures: ${this.curData.structures.length}, logics: ${this.curData.logics.length}, views: ${this.curData.views.length}`
             }
             return ''
         }
     },
+    // mounted() {
+    //     const data = Object.freeze(createRelataion(data1));
+    //     this.curData = data;
+    //     if(this.$refs.jflow) {
+    //         this.rerender();
+    //     } else {
+    //             this.configs.layout = new ERLayout(data);
+    //     }
+    // },
     methods: {
         // onChange(event) {
         //     switch(event.target.value) {
@@ -327,4 +390,3 @@ export default {
     },
 };
 </script>
-

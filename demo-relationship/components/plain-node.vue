@@ -20,20 +20,25 @@ export default {
     data() {
         let backgroundColor;
         let color;
-        if(this.node.isStructure || this.node.concept === 'structure') {
-            backgroundColor = '#EA9010'
-            color = "#fff"
-        }
+        
         if(this.node.concept === 'entity') {
             backgroundColor = '#37371F'
+            color = "#fff"
+        }
+        if(this.node.isStructure || this.node.concept === 'structure') {
+            backgroundColor = '#EA9010'
             color = "#fff"
         }
         if(this.node.concept === 'logic') {
             backgroundColor = '#90BE6D'
             color = "#000"
         }
-        if(this.node.concept === 'View') {
+        if(this.node.concept === 'viewlogic') {
             backgroundColor = '#C9E3AC'
+            color = "#000"
+        }
+        if(this.node.concept === 'view') {
+            backgroundColor = '#EAEFBD'
             color = "#000"
         }
         return {
