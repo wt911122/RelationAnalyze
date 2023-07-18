@@ -41,6 +41,10 @@ function figureOutRefs(result) {
         refByViewLogic,
     }
 }
+
+function getTypeKey(node) {
+    return (node.typeAnnotation || node.__TypeAnnotation)?.typeKey;
+}
 Promise.all([
     Promise.all($data.app.logics.map(async s => { 
         const result = await window.globalData.naslServer.findReferences(s);
@@ -54,11 +58,11 @@ Promise.all([
         return {
             name: s.name,
             param: s.params.map(p => ({
-                ref: p.typeAnnotation.typeKey,
+                ref: getTypeKey(p),
                 name: p.name,
             })),
             return: s.returns.map(p => ({
-                ref: p.typeAnnotation.typeKey,
+                ref: getTypeKey(p),
                 name: p.name,
             })),
             refByLogic:  Array.from(new Set(refByLogic)),
@@ -82,7 +86,7 @@ Promise.all([
             structure: s.name,
             properties: s.properties.map(p => {
                 return {
-                    ref: p.typeAnnotation.typeKey,
+                    ref: getTypeKey(p),
                     name: p.name
                 }
             }),
@@ -94,30 +98,32 @@ Promise.all([
     })).then(res => {
         return res
     }),
-    Promise.resolve($data.app.views.map(v => {
-        const viewNames = [];
-        function iterate(viewNode, lastName) {
-            viewNames.push({
-                name: lastName,
-                logics: viewNode.logics.map(l => ({
-                    name: l.name,
-                    param: l.params.map(p => ({
-                        ref: p.typeAnnotation.typeKey,
-                        name: p.name,
-                    })),
-                    return: l.returns.map(p => ({
-                        ref: p.typeAnnotation.typeKey,
-                        name: p.name,
-                    }))
-                })),   
-            });
-            viewNode.children.forEach(c => {
-                iterate(c, `${lastName}/${c.name}`);
-            })
-        }
-        iterate(v, v.name);
-        return viewNames;
-    }).reduce((accu, curr) => accu.concat(curr), []))
+    Promise.resolve(
+        $data.app.frontends.map(f => f.views.map(v => {
+            const viewNames = [];
+            function iterate(viewNode, lastName) {
+                viewNames.push({
+                    name: lastName,
+                    logics: viewNode.logics.map(l => ({
+                        name: l.name,
+                        param: l.params.map(p => ({
+                            ref: getTypeKey(p),
+                            name: p.name,
+                        })),
+                        return: l.returns.map(p => ({
+                            ref: getTypeKey(p),
+                            name: p.name,
+                        }))
+                    })),   
+                });
+                viewNode.children.forEach(c => {
+                    iterate(c, `${lastName}/${c.name}`);
+                })
+            }
+            iterate(v, `${f.name}/${v.name}`);
+            return viewNames;
+        }).reduce((accu, curr) => accu.concat(curr), [])).flat())
 ]).then(([logics, structures, views]) => {
     console.log(JSON.stringify({ logics, structures, views }, null, '\t'));
 })
+            
