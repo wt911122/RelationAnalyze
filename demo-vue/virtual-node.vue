@@ -1,11 +1,10 @@
 <template>
-    <!-- jflowId 就是 layoutNode 中 ID -->
     <j-group 
         :source="node"
         @click="onClick" 
         :configs="configs">
         <j-text :configs="{
-            textColor: '#EB6864',
+            textColor: this.coin ? '#60CFC4' : '#EB6864',
             content: node.name,
         }">
         </j-text>
@@ -29,12 +28,13 @@ export default {
                 borderColor: '#EB6864',
                 borderWidth: 2,
                 padding: 20,
-            }
+            },
+            coin: false,
         }
     },
     methods: {
         onClick() {
-            console.log('click', this.meta)
+            this.coin = !this.coin;
         }
     }
 }

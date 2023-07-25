@@ -9,6 +9,7 @@
         <span class="legend structure">Structure</span>
         <span class="legend globallogic">GlobalLogic</span>
         <span class="legend viewlogic">ViewLogic</span>
+        <span class="legend viewevent">ViewEvent</span>
         <span class="legend view">View</span>
     </div>
         <div style="display: block;
@@ -39,6 +40,11 @@
                     :node="source">
                 </j-plain-node>
             </template>
+            <template #ViewEvent="{ source }">
+                <j-plain-node
+                    :node="source">
+                </j-plain-node>
+            </template>
             <template #Logic="{ source }">
                 <j-er-node-comp
                     v-if="showProperty"
@@ -59,6 +65,7 @@
                     :node="source">
                 </j-plain-node>
             </template>
+            
             <template #plainlink="{ configs }">
                 <jBezierLink
                     :configs="configs"
@@ -81,15 +88,15 @@
                     {{ op.text }}
                 </option>
             </select> -->
-
+<!-- 
             <button @click="toggleView">toggle View ({{ configs.layout.viewVisible }})</button>
             <button @click="toggleLogic">toggle Logic ({{ configs.layout.logicVisible }})</button>
-            <button @click="toggleStructure">toggle Sturcture ({{ configs.layout.structureVisible }})</button>
+            <button @click="toggleStructure">toggle Sturcture ({{ configs.layout.structureVisible }})</button> -->
             <!-- <button @click="toggleLcap">toggle LCAP ({{ configs.layout.LCAPvisible }})</button> -->
             <!-- <button @click="toggleFilterMultiRef">toggle multiRef Filter ({{ configs.layout.multiRefFilter }})</button> -->
             <!-- <button @click="toggleFilterMultiRefLogic">toggle multiRef Logic Filter ({{ configs.layout.multiLogicRefFilter }})</button> -->
             <!-- <button @click="togglePrimary">toggle Primary Filter ({{ configs.layout.primaryFilter }})</button> -->
-           <br>
+           <!-- <br>
             <label>
                 filterBy: <input v-model="filterContent" /> 
                 <button @click="doFilter('Structure')">Struture</button>
@@ -97,7 +104,7 @@
                 <button @click="doFilter('ViewLogic')">ViewLogic</button>
                 <button @click="doFilter('View')">View</button>
             </label>
-            <button @click="toggleProperty">toggle property ({{ showProperty }})</button>
+            <button @click="toggleProperty">toggle property ({{ showProperty }})</button> -->
         </div>
         <dialog ref="datamodal">
             <form method="dialog">
@@ -116,33 +123,56 @@
         <dialog ref="scriptdialog">
             <form method="dialog">
             <textarea style="white-space: pre;width: 600px; height:400px">
+                function getFullName(node) {
+                    return `${node.getNamespace()}.${node.name}`;
+                }
                 function figureOutRefs(result) {
                     const refByLogic = [];
                     const refByView = [];
+                    const refByViewEvent = [];
                     const refByViewLogic = [];
+                    const refBySturcture = [];
                     const refByOther = [];
                     for (const entry of result) {
                         const n = entry[0];
                         
                         switch(n.concept) {
+                            
                             case 'Logic': 
-                                refByLogic.push(entry[0].name);
+                                refByLogic.push(getFullName(entry[0]));
+                                break;
+                            case 'Structure':
+                                refBySturcture.push(getFullName(entry[0]));
                                 break;
                             case 'View':
+                            case 'Frontend':
+                
                                 let v = entry[1];
                                 function iterate(node, lastName) {
                                     node.children.forEach(c => {
-                                        if(c.node.concept === 'View') {
-                                            iterate(c, `${lastName}/${c.node.name}`);
-                                        } else {
-                                            if(c.node.concept === 'Logic') {
+                                        switch(c.node.concept) {
+                                            case 'View':
+                                            case 'Frontend': 
+                                                iterate(c, `${lastName}/${c.node.name}`);
+                                                break
+                                            case 'ViewElement':
+                                                iterate(c, lastName);
+                                                break;
+                                            case 'Logic':
                                                 refByViewLogic.push({
                                                     view: lastName,
                                                     logic: c.node.name,
                                                 })
-                                            } else if(lastName) {
+                                                break;
+                                            case 'BindEvent':
+                                                refByViewEvent.push({
+                                                    view: lastName,
+                                                    element: c.node.parentNode.name,
+                                                    event: 'click',
+                                                })
+                                                break;
+                                            default: 
                                                 refByView.push(lastName)
-                                            }
                                         }
                                     })
                                 }
@@ -157,6 +187,8 @@
                         refByView,
                         refByOther,
                         refByViewLogic,
+                        refByViewEvent,
+                        refBySturcture,
                     }
                 }
                 
@@ -164,17 +196,44 @@
                     return (node.typeAnnotation || node.__TypeAnnotation)?.typeKey;
                 }
                 Promise.all([
+                    Promise.all($data.app.dataSources.map(async ds => {
+                            // const dsname = ds.name;
+                            const r = await Promise.all(ds.entities.map(async entity => {
+                                const result = await window.globalData.naslServer.findReferences(entity);
+                                const {
+                                    refByLogic,
+                                    refByView,
+                                    refByOther,
+                                    refByViewLogic,
+                                    refByViewEvent,
+                                    refBySturcture
+                                } = figureOutRefs(result);
+                                return {
+                                    entity: getFullName(entity),
+                                    refByLogic,
+                                    refByView: Array.from(new Set(refByView)),
+                                    refByViewLogic,
+                                    refByViewEvent,
+                                    refBySturcture,
+                                    refByOther
+                                }
+                            }));
+                            return r;
+                        })).then(res => {
+                            return res.flat();
+                        }),
                     Promise.all($data.app.logics.map(async s => { 
                         const result = await window.globalData.naslServer.findReferences(s);
                         const {
                             refByLogic,
                             refByView,
                             refByOther,
-                            refByViewLogic
+                            refByViewLogic,
+                            refByViewEvent
                         } = figureOutRefs(result);
                 
                         return {
-                            name: s.name,
+                            name: getFullName(s),
                             param: s.params.map(p => ({
                                 ref: getTypeKey(p),
                                 name: p.name,
@@ -183,9 +242,10 @@
                                 ref: getTypeKey(p),
                                 name: p.name,
                             })),
-                            refByLogic:  Array.from(new Set(refByLogic)),
+                            refByLogic: Array.from(new Set(refByLogic)),
                             refByView: Array.from(new Set(refByView)),
                             refByViewLogic,
+                            refByViewEvent,
                             refByOther
                         }
                     })).then(res => {
@@ -197,11 +257,13 @@
                             refByLogic,
                             refByView,
                             refByViewLogic,
+                            refByViewEvent,
+                            refBySturcture,
                             refByOther,
                         } = figureOutRefs(result);
                         
                         return {
-                            structure: s.name,
+                            structure: getFullName(s),
                             properties: s.properties.map(p => {
                                 return {
                                     ref: getTypeKey(p),
@@ -211,6 +273,8 @@
                             refByLogic,
                             refByView: Array.from(new Set(refByView)),
                             refByViewLogic,
+                            refByViewEvent,
+                            refBySturcture,
                             refByOther
                         }
                     })).then(res => {
@@ -220,6 +284,9 @@
                         $data.app.frontends.map(f => f.views.map(v => {
                             const viewNames = [];
                             function iterate(viewNode, lastName) {
+                
+                                viewNode.getViewBindEvents();
+                
                                 viewNames.push({
                                     name: lastName,
                                     logics: viewNode.logics.map(l => ({
@@ -232,7 +299,11 @@
                                             ref: getTypeKey(p),
                                             name: p.name,
                                         }))
-                                    })),   
+                                    })),  
+                                    events: viewNode.getViewBindEvents().map(bindEvent => ({
+                                        element: bindEvent.parentNode.name,
+                                        event: bindEvent.name,
+                                    }))
                                 });
                                 viewNode.children.forEach(c => {
                                     iterate(c, `${lastName}/${c.name}`);
@@ -241,10 +312,10 @@
                             iterate(v, `${f.name}/${v.name}`);
                             return viewNames;
                         }).reduce((accu, curr) => accu.concat(curr), [])).flat())
-                ]).then(([logics, structures, views]) => {
-                    console.log(JSON.stringify({ logics, structures, views }, null, '\t'));
+                ]).then(([entities, logics, structures, views]) => {
+                    console.log(JSON.stringify({ entities, logics, structures, views }, null, '\t'));
                 })
-                            
+                                    
             </textarea>
             <button value="cancel">close</button>
             </form>
@@ -390,7 +461,7 @@ export default {
             if(this.$refs.jflow) {
                 this.rerender();
             } else {
-                 this.configs.layout = new ERLayout(data);
+                this.configs.layout = new ERLayout(data);
             }
         }
     },

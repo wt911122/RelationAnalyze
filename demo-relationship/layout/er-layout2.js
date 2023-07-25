@@ -54,6 +54,7 @@ class ERLayout {
             structures,
             views,
             viewLogics,
+            viewEvents,
             logics,
             entities
         } = source;
@@ -61,6 +62,7 @@ class ERLayout {
         let structureRefFilter = new Set();
         let logicRefsAfterFilter = new Set();
         let viewRefsAfterFilter = new Set();
+        let viewEventRefsAfterFilter = new Set();
         let viewLogicRefsAfterFilter = new Set();
         let entityRefsAfterFilter = new Set();
 
@@ -73,13 +75,11 @@ class ERLayout {
         let entityNodes = entities.map(i => new PlainERnode(i, 'Entity'));
         let structNodes = structures.map(i => new PlainERnode(i, 'Structure'));
         let logicNodes = logics.map(i => new PlainERnode(i, 'Logic'));
-        
-        
-
+        let viewEventsNodes = viewEvents.map(i => new PlainERnode(i, 'ViewEvent'));
         let viewLogicsNodes = viewLogics.map(i => new PlainERnode(i, 'ViewLogic'));
         let viewNodes = views.map(i => new PlainERnode(i, 'View'));
         
-        if(filterContent && this.filterPart === 'View') {
+      /*  if(filterContent && this.filterPart === 'View') {
             viewNodes.filter(filterByContent('View')).forEach(s => {
                 viewRefsAfterFilter.add(s.source);
             });
@@ -88,6 +88,11 @@ class ERLayout {
                     viewLogicRefsAfterFilter.add(s.source)
                 }
             });
+            viewEventsNodes.forEach(s => {
+                if(ArrayInsectLeft(s.source.refByView, viewRefsAfterFilter)) {
+                    viewEventRefsAfterFilter.add(s.source)
+                }
+            })
             logicNodes.forEach(s => {
                 if(ArrayInsectLeft(s.source.refByViewLogic, viewLogicRefsAfterFilter) 
                 || ArrayInsectLeft(s.source.refByView, viewRefsAfterFilter)) {
@@ -105,38 +110,45 @@ class ERLayout {
                     structureRefFilter.add(s.source);
                 }
             });
-        }
+            
+        }*/
 
-        if(filterContent && this.filterPart === 'ViewLogic') {
-            viewLogicsNodes.filter(filterByContent('ViewLogic')).forEach(vn => {
-                viewLogicRefsAfterFilter.add(vn.source);
-                vn.source.refByView.forEach(v => {
-                    viewRefsAfterFilter.add(v);
-                });
-            });
-            logicNodes.forEach(s => {
-                if(ArrayInsectLeft(s.source.refByViewLogic, viewLogicRefsAfterFilter)) {
-                    logicRefsAfterFilter.add(s.source)
-                }
-            });
-            structNodes.forEach(s => {
-                if(ArrayInsectLeft(s.source.refByViewLogic, viewLogicRefsAfterFilter) 
-                || ArrayInsectLeft(s.source.refByLogic, logicRefsAfterFilter) 
-                || ArrayInsectLeft(s.source.refByView, viewRefsAfterFilter)) {
-                    s.source.properties.forEach((p) => {
-                        entityRefsAfterFilter.add(p.ref)
-                    })
-                    structureRefFilter.add(s.source);
-                }
-            });
-        }
-
+        // if(filterContent && this.filterPart === 'ViewLogic') {
+        //     viewLogicsNodes.filter(filterByContent('ViewLogic')).forEach(vn => {
+        //         viewLogicRefsAfterFilter.add(vn.source);
+        //         vn.source.refByView.forEach(v => {
+        //             viewRefsAfterFilter.add(v);
+        //         });
+        //     });
+        //     logicNodes.forEach(s => {
+        //         if(ArrayInsectLeft(s.source.refByViewLogic, viewLogicRefsAfterFilter)) {
+        //             logicRefsAfterFilter.add(s.source)
+        //         }
+        //     });
+        //     structNodes.forEach(s => {
+        //         if(ArrayInsectLeft(s.source.refByViewLogic, viewLogicRefsAfterFilter) 
+        //         || ArrayInsectLeft(s.source.refByLogic, logicRefsAfterFilter) 
+        //         || ArrayInsectLeft(s.source.refByView, viewRefsAfterFilter)) {
+        //             s.source.properties.forEach((p) => {
+        //                 entityRefsAfterFilter.add(p.ref)
+        //             })
+        //             structureRefFilter.add(s.source);
+        //         }
+        //     });
+        // }
+/*
         if(filterContent && this.filterPart === 'Logic') {
             logicNodes.filter(filterByContent('Logic')).forEach(s => {
                 logicRefsAfterFilter.add(s.source);
 
                 s.source.refByViewLogic.forEach(l => {
                     viewLogicRefsAfterFilter.add(l);
+                    l.refByView.forEach(v => {
+                        viewRefsAfterFilter.add(v);
+                    });
+                });
+                s.source.refByViewEvent.forEach(l => {
+                    viewEventRefsAfterFilter.add(l);
                     l.refByView.forEach(v => {
                         viewRefsAfterFilter.add(v);
                     });
@@ -200,10 +212,13 @@ class ERLayout {
             entityNodes = []
         }
 
+
+*/
         [
             ...entityNodes,
             ...structNodes,
             ...logicNodes,
+            ...viewEventsNodes,
             ...viewLogicsNodes,
             ...viewNodes
         ].forEach(n => {
@@ -214,109 +229,72 @@ class ERLayout {
             });
         });
 
-        const genLinks = (sNode) => {
-            const isLogic = sNode.source.concept === 'logic';
-            const source = sNode.source;
-            source.refByLogic.forEach(l => {
-                const node = logicNodes.find(n => n.name === l.name); 
-                if(node) {
-                    if(isLogic) {
+        const genLink = (list, targetList, source) => {
+            if(list) {
+                list.forEach(s => {
+                    const node = targetList.find(n => n.source === s); 
+                    if(node) {
                         this.flowLinkStack.push({
-                            from: sNode,
+                            from: source,
                             to: node,
-                            fromDir: 2,
-                            toDir: 0,
-                            part: id++,
-                        })
-                    } else  {
-                        this.flowLinkStack.push({
-                            from: sNode,
-                            to: node,
-                            fromDir: 0,
-                            toDir: 2,
                             part: id++,
                         })
                     }
-                }
-            });
-            source.refByViewLogic.forEach(l => {
-                const node = viewLogicsNodes.find(n => n.name === l.name); 
-                if(node) {
-                    this.flowLinkStack.push({
-                        from: sNode,
-                        to: node,
-                        fromDir: 0,
-                        toDir: 2,
-                        part: id++,
-                    })
-                }
-            });
-            source.refByView.forEach(l => {
-                const node = viewNodes.find(n => n.name === l.name); 
-                if(node) {
-                    this.flowLinkStack.push({
-                        from: sNode,
-                        to: node,
-                        fromDir: 0,
-                        toDir: 2,
-                        part: id++,
-                    })
-                }
-            })
-        }
-
-        structNodes.forEach(sNode => {
-            const source = sNode.source;
-            source.properties.forEach(p => {
-                const node = entityNodes.find(n => n.name === p.ref.name); 
-                if(node) {
-                    this.flowLinkStack.push({
-                        from: node,
-                        to: sNode,
-                        fromDir: 0,
-                        toDir: 2,
-                        part: id++,
-                    })
-                }
-            });
-            genLinks(sNode);
-        });
-
-        logicNodes.forEach(sNode => {
-            genLinks(sNode);
-        });
-
-        viewLogicsNodes.forEach(sNode => {
-            const v = sNode.source.refByView[0];
-            const node = viewNodes.find(n => n.name === v.name); 
-            if(node) {
-                this.flowLinkStack.push({
-                    from: sNode,
-                    to: node,
-                    fromDir: 0,
-                    toDir: 2,
-                    part: id++,
                 })
             }
-        })
+        }
 
-        let logicLevelNodes = Array.from(logicNodes.reduce((accu, curr) => {
-            const l = curr.source.level;
-            if(!accu.has(l)) {
-                accu.set(l, { level: l, nodes: []}); 
-            }
-            accu.get(l).nodes.push(curr);
-            return accu;
-        }, new Map()).values()).sort((a, b) => b.level - a.level);
+        const genLinks = (sNode) => {
+            const source = sNode.source;
+            genLink(source.refByStructure, structNodes, sNode);
+            genLink(source.refByLogic, logicNodes, sNode);
+            genLink(source.refByView, viewNodes, sNode);
+            genLink(source.refByViewLogic, viewLogicsNodes, sNode);
+            genLink(source.refByViewEvent, viewEventsNodes, sNode);
+        }
+
+        entityNodes.forEach(genLinks);
+        structNodes.forEach(genLinks);
+        logicNodes.forEach(genLinks);
+        viewEventsNodes.forEach(genLinks);
+        viewLogicsNodes.forEach(genLinks);
+
+
+        // logicNodes.forEach(sNode => {
+        //     genLinks(sNode);
+        // });
+
+        // viewLogicsNodes.forEach(sNode => {
+        //     const v = sNode.source.refByView[0];
+        //     const node = viewNodes.find(n => n.name === v.name); 
+        //     if(node) {
+        //         this.flowLinkStack.push({
+        //             from: sNode,
+        //             to: node,
+        //             fromDir: 0,
+        //             toDir: 2,
+        //             part: id++,
+        //         })
+        //     }
+        // })
+
+        // let logicLevelNodes = Array.from(logicNodes.reduce((accu, curr) => {
+        //     const l = curr.source.level;
+        //     if(!accu.has(l)) {
+        //         accu.set(l, { level: l, nodes: []}); 
+        //     }
+        //     accu.get(l).nodes.push(curr);
+        //     return accu;
+        // }, new Map()).values()).sort((a, b) => b.level - a.level);
         
         Object.assign(this, {
             entityNodes,
             structNodes, 
             logicNodes, 
             viewLogicsNodes, 
+            viewEventsNodes,
             viewNodes,
-
-            logicLevelNodes
+            // logicLevelNodes
         });
 
     }
@@ -330,13 +308,16 @@ class ERLayout {
             structNodes, 
             logicNodes, 
             viewLogicsNodes, 
+            viewEventsNodes,
             viewNodes,
-            logicLevelNodes
+            // logicLevelNodes
         } = this;
+        // debugger
         function layoutMath(
             nodes, 
             columnPos = 0,
-            callback
+            callback,
+            onlyX = false,
         ) {
             let reduceHeight = 0;
             let reduceWidth = 0;
@@ -344,16 +325,17 @@ class ERLayout {
                 const instance = jflow.getRenderNodeBySource(n.source);
                 const { width, height } = instance.getBoundingDimension();
                 reduceWidth = Math.max(width, reduceWidth);
-            
-                const halfHeight = height/2;
-                if (idx > 0) {
-                    reduceHeight += halfHeight
+                if(!onlyX) {
+                    const halfHeight = height/2;
+                    if (idx > 0) {
+                        reduceHeight += halfHeight
+                    }
+                    instance.anchor[1] = reduceHeight;
+                    if(callback){
+                        callback(n, reduceHeight)
+                    }
+                    reduceHeight += (halfHeight + gap);
                 }
-                instance.anchor[1] = reduceHeight;
-                if(callback){
-                    callback(n, reduceHeight)
-                }
-                reduceHeight += (halfHeight + gap);
             });
             columnPos = columnPos + reduceWidth / 2;
             nodes.forEach(n => {
@@ -367,39 +349,160 @@ class ERLayout {
         let columnspan = [
             entityNodes,
             structNodes, 
-            logicLevelNodes, 
+            // logicNodes, 
         ].reduce((columnpos, nodes) => {
             if(nodes.length === 0) {
                 return columnpos;
             }
-            if(nodes[0].nodes) {
-                return nodes.reduce((subcolumnpos, subNodes) => {
-                    
-                    return layoutMath(subNodes.nodes, subcolumnpos) + 200
-                }, columnpos);
-            }
             return layoutMath(nodes, columnpos) + 200
         }, 0);
-        let lastSource = null;
-        let reduceWidth = 0;
-        columnspan = layoutMath(viewLogicsNodes, columnspan, (node, height) => {
-            const s = node.source.refByView[0].name;
-            if(s !== lastSource) {
-                
-                // const view = viewNodes.find(v => v.source.name === s);
-                const source = node.source.refByView[0];
-                const instance = jflow.getRenderNodeBySource(source);
-                const { width } = instance.getBoundingDimension();
-                reduceWidth = Math.max(width, reduceWidth);
-                instance.anchor[1] = height;
-                lastSource = s;
+
+        let _nodeMap = new Map();
+        logicNodes.forEach(node => {
+            const source = node.source;
+            const name = source.name 
+            if(!_nodeMap.has(name)) {
+                _nodeMap.set(name, {
+                    node, 
+                    level: 0
+                })
             }
-        }) + 200;
-        columnspan = columnspan + reduceWidth / 2;
-        viewNodes.forEach(n => {
-            const instance = jflow.getRenderNodeBySource(n.source);
-            instance.anchor[0]= columnspan;
+            source.refByLogic.forEach(logic => {
+                const node = logicNodes.find(node => node.source.name === logic.name);
+                const name = node.name;
+                if(!_nodeMap.has(name)) {
+                    _nodeMap.set(name, {
+                        node, 
+                        level: 0
+                    })
+                }
+                const t = _nodeMap.get(name);
+                t.level ++;
+            });
         });
+        const levelMap = {};
+        _nodeMap.forEach((val) => {
+            const level = val.level;
+            if(!levelMap[level]) {
+                levelMap[level] = [];
+            }
+            levelMap[level].push(val.node);
+        });
+
+        const leveledLogic = Object.keys(levelMap).sort((a, b) => b-a);
+
+ 
+        // const viewInnerHeight = new WeakMap();
+        let reduceHeight = 0;
+        viewNodes.forEach(vnode => {
+            const source = vnode.source
+            let startHeight = reduceHeight;
+            const instance = jflow.getRenderNodeBySource(source);
+            const { height } = instance.getBoundingDimension();
+            instance.anchor[1] = height/2 + startHeight;
+            function getHeight(list) {
+                let _reduceHeight = startHeight;
+                list.forEach((n, idx) => {
+                    const instance = jflow.getRenderNodeBySource(n.source);
+                    const { height } = instance.getBoundingDimension();
+                    const halfHeight = height/2;
+                    _reduceHeight += halfHeight
+                    instance.anchor[1] = _reduceHeight;
+                    _reduceHeight += (halfHeight + gap);
+
+                });
+                return _reduceHeight;
+            }
+            const logiclist = viewLogicsNodes.filter(n => n.source.refByView.includes(source));
+            const eventlist = viewEventsNodes.filter(n => n.source.refByView.includes(source));
+            const h = Math.max(getHeight(logiclist), getHeight(eventlist));
+            reduceHeight = h + gap * 2;
+        });
+
+        // const logicRemains = [];
+        leveledLogic.forEach(level => {
+            const logicNodes = levelMap[level];
+            logicNodes.forEach(node => {
+                const source = node.source
+                let height = 0;
+                let count = 0;
+                function reduceHeight(s) {
+                    const instance = jflow.getRenderNodeBySource(s);
+                    height += instance.anchor[1];
+                    count++;
+                }
+                source.refByLogic.forEach(reduceHeight);
+                source.refByView.forEach(reduceHeight);
+                source.refByViewLogic.forEach(reduceHeight)
+                source.refByViewEvent.forEach(reduceHeight);
+                if(count === 0) {
+                    // logicRemains.push(node);
+                } else {
+                    const instance = jflow.getRenderNodeBySource(source);
+                    instance.anchor[1] = height/count
+                }
+            });
+            columnspan = layoutMath(logicNodes, columnspan, null, true) + 200
+        });
+       
+        const structRemains = [];
+        structNodes.forEach(node => {
+            const source = node.source
+            let height = 0;
+            let count = 0;
+            function reduceHeight(s) {
+                const instance = jflow.getRenderNodeBySource(s);
+                height += instance.anchor[1];
+                count++;
+            }
+            source.refByLogic.forEach(reduceHeight);
+            source.refByView.forEach(reduceHeight)
+            source.refByViewLogic.forEach(reduceHeight)
+            source.refByViewEvent.forEach(reduceHeight);
+            if(count === 0) {
+                structRemains.push(node);
+            } else {
+                const instance = jflow.getRenderNodeBySource(source);
+                instance.anchor[1] = height/count
+            }
+        });
+        const entityRemains = [];
+        entityNodes.forEach(node => {
+            const source = node.source
+            let height = 0;
+            let count = 0;
+            function reduceHeight(s) {
+                const instance = jflow.getRenderNodeBySource(s);
+                height += instance.anchor[1];
+                count++;
+            }
+            source.refByStructure.forEach(reduceHeight);
+            source.refByLogic.forEach(reduceHeight);
+            source.refByView.forEach(reduceHeight)
+            source.refByViewLogic.forEach(reduceHeight)
+            source.refByViewEvent.forEach(reduceHeight);
+            if(count === 0) {
+                entityRemains.push(node);
+            } else {
+                console.log(node, height, count)
+                const instance = jflow.getRenderNodeBySource(source);
+                instance.anchor[1] = height/count
+            }
+        });
+
+
+
+        [
+            viewLogicsNodes,
+            viewEventsNodes, 
+            viewNodes, 
+        ].reduce((columnpos, nodes) => {
+            if(nodes.length === 0) {
+                return columnpos;
+            }
+            return layoutMath(nodes, columnpos, null, true) + 200
+        }, columnspan);
+
     }
 
     toggleView() {

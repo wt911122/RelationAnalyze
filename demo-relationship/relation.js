@@ -4,6 +4,14 @@ let entities = [];
 let views = [];
 let logics = [];
 let viewLogics = [];
+let viewEvents = [];
+
+// function genViewEventName(source, e) {
+//    return `${source.name}/${e.element}@${e.event}`
+// }
+// function genViewLogicName(source, l) {
+//     return `${source.name}/${l.name}`
+//  }
 // create
 function createView(source) {
     const s = {
@@ -12,9 +20,11 @@ function createView(source) {
         source,
         name: source.name,
         logics: [],
+        events: []
     }
 
     source.logics.map(l => createViewLogic(`${source.name}/${l.name}`, l, s))
+    source.events.map(e => createViewEvent(`${source.name}/${e.element}@${e.event}`, e, s));
     views.push(s)
 }
 function createViewLogic(name, logic, view) {
@@ -24,10 +34,18 @@ function createViewLogic(name, logic, view) {
         name,
         param: logic.param.slice(),
         return: logic.return.slice(),
-        // refView: viewName,
-        refByLogic: [],
         refByView: [view],
         refByViewLogic: [],
+    })
+}
+
+function createViewEvent(name, event, view) {
+    viewEvents.push({
+        id: id++,
+        concept: 'viewevents',
+        name,
+        event: event,
+        refByView: [view],
     })
 }
 
@@ -43,28 +61,30 @@ function createLogic(source) {
         refByLogic: [],
         refByView: [],
         refByViewLogic: [],
+        refByViewEvent: [],
     })
 }
 
-function createOrGetEntity(source) {
-    let f = entities.find(e => e.name === source);
-    if(f) {
-        return f;
-    }
-    f = {
-        id: id++,
-        concept: 'entity',
-        isStructure: source.includes('.structures.'),
-        name: source,
-    }
-    entities.push(f);
-    return f;
-}
+// function createOrGetEntity(source) {
+//     let f = entities.find(e => e.name === source);
+//     if(f) {
+//         return f;
+//     }
+//     f = {
+//         id: id++,
+//         concept: 'entity',
+//         isStructure: source.includes('.structures.'),
+//         name: source,
+//     }
+//     entities.push(f);
+//     return f;
+// }
 function createProperty(source) {
     return {
         id: id++,
         concept: 'property',
-        ref: createOrGetEntity(source.ref),
+        source,
+        ref: source.ref,
         name: source.name,
     }
 }
@@ -72,79 +92,34 @@ function createProperty(source) {
 
 function createStructrue(source) {
     structures.push({
+        level: 0,
         id: id++,
         concept: 'structure',
         source,
         name: source.structure,
         properties: source.properties.map(createProperty),
+        refByStructure: [],
         refByLogic: [],
         refByView: [],
         refByViewLogic: [],
+        refByViewEvent: [],
     })
 }
 
-// bind
-
-
-
-/* 
-function createOrGetView(source) {
-    let f = views.find(e => e.name === source);
-    if(f) {
-        return f;
-    }
-    f = {
+function createEntity(source) {
+    entities.push({
+        level: 0,
         id: id++,
-        concept: 'View',
-        name: source,
-        logics: source.logics.map(l => createOrgetViewLogic(`${source}/${l}`))
-    }
-    views.push(f);
-    return f;
+        concept: 'entity',
+        source,
+        name: source.entity,
+        refByStructure: [],
+        refByLogic: [],
+        refByView: [],
+        refByViewLogic: [],
+        refByViewEvent: [],
+    })
 }
-function createOrgetViewLogic(source) {
-    let f = viewLogics.find(e => e.name === source);
-    if(f) {
-        return f;
-    }
-    f = {
-        id: id++,
-        concept: 'viewlogic',
-        name: source,
-    }
-    viewLogics.push(f);
-    return f;
-}
-function createOrgetLogic(source) {
-    let f = logics.find(e => e.name === source);
-    if(f) {
-        return f;
-    }
-    f = {
-        id: id++,
-        concept: 'logic',
-        name: source,
-        param: [],
-        return: [],
-        refByLogic: source.refByLogic(createOrgetLogic),
-        refByView: source.refByView(createOrGetView),
-    }
-    logics.push(f);
-    return f;
-}
-
-
-function createStructrue(source) {
-    return {
-        id: id++,
-        concept: 'structure',
-        name: source.structure,
-        properties: source.properties.map(createProperty),
-        refByLogic: source.refByLogic.map(createOrgetLogic),
-        refByView: source.refByView.map(createOrGetView),
-    }
-}
-*/
 
 function analyzeRefs(struts) {
     const isLogic = struts.concept === 'logic';
@@ -186,21 +161,71 @@ export function createRelataion(source) {
     views = [];
     logics = [];
     viewLogics = [];
+    viewEvents = [];
     
-    source.views.map(createView);
-    source.logics.map(createLogic);
+    source.entities.map(createEntity);
     source.structures.map(createStructrue);
+    source.logics.map(createLogic);
+    source.views.map(createView);
+    
+    const findAndSync = (list, syncList, targetList) => {
+        list.forEach(name => {
+            const target = syncList.find(l => l.name === name);
+            if(target) {
+                targetList.push(target);
+            }
+        });
+    }
+    console.log(viewEvents)
+    
+    entities.forEach(entity => {
+        const {
+            refByLogic,
+            refByView,
+            refByViewLogic,
+            refByViewEvent,
+            refBySturcture
+        } = entity.source;
+        findAndSync(refByLogic, logics, entity.refByLogic);
+        findAndSync(refByView, views, entity.refByView);
+        findAndSync(refByViewLogic.map(vl => `${vl.view}/${vl.logic}`), viewLogics, entity.refByViewLogic);
+        findAndSync(refByViewEvent.map(ve => `${ve.view}/${ve.element}@${ve.event}`), viewEvents, entity.refByViewEvent);
+        findAndSync(refBySturcture, structures, entity.refByStructure);
+    })
+
+    structures.forEach(struct => {
+        const {
+            refByLogic,
+            refByView,
+            refByViewLogic,
+            refByViewEvent,
+            refBySturcture
+        } = struct.source;
+        findAndSync(refByLogic, logics, struct.refByLogic);
+        findAndSync(refByView, views, struct.refByView);
+        findAndSync(refByViewLogic.map(vl => `${vl.view}/${vl.logic}`), viewLogics, struct.refByViewLogic);
+        findAndSync(refByViewEvent.map(ve => `${ve.view}/${ve.element}@${ve.event}`), viewEvents, struct.refByViewEvent);
+        findAndSync(refBySturcture, structures, struct.refByStructure);
+    });
 
     logics.forEach(l => {
-        analyzeRefs(l)
+        const {
+            refByLogic,
+            refByView,
+            refByViewLogic,
+            refByViewEvent,
+        } = l.source;
+        findAndSync(refByLogic, logics, l.refByLogic);
+        findAndSync(refByView, views, l.refByView);
+        findAndSync(refByViewLogic.map(vl => `${vl.view}/${vl.logic}`), viewLogics, l.refByViewLogic);
+        findAndSync(refByViewEvent.map(ve => `${ve.view}/${ve.element}@${ve.event}`), viewEvents, l.refByViewEvent);
     });
-    structures.forEach(s => {
-        analyzeRefs(s)
-    });
+    
     return {
         structures: structures.slice(),
         views: views.slice(),
         viewLogics: viewLogics.slice(),
+        viewEvents: viewEvents.slice(),
         logics: logics.slice(),
         entities: entities.slice(),
     }

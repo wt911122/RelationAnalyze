@@ -37,6 +37,10 @@ export default {
             backgroundColor = '#C9E3AC'
             color = "#000"
         }
+        if(this.node.concept === 'viewevents') {
+            backgroundColor = '#CECE5A'
+            color = "#000"
+        }
         if(this.node.concept === 'view') {
             backgroundColor = '#EAEFBD'
             color = "#000"
