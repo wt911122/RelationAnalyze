@@ -5,12 +5,12 @@
     overflow: visible;
     position: relative;">
     <div style="position:absolute; left: 20px; top: 10px;">
-        <span class="legend entity">Entity</span>
-        <span class="legend structure">Structure</span>
-        <span class="legend globallogic">GlobalLogic</span>
-        <span class="legend viewlogic">ViewLogic</span>
-        <span class="legend viewevent">ViewEvent</span>
-        <span class="legend view">View</span>
+        <span class="legend entity">实体</span>
+        <span class="legend structure">结构</span>
+        <span class="legend globallogic">全局逻辑</span>
+        <span class="legend viewlogic">页面逻辑</span>
+        <span class="legend viewevent">页面事件</span>
+        <span class="legend view">页面</span>
     </div>
         <div style="display: block;
         width: 100%; height: 100%;">
