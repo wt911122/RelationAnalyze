@@ -4,13 +4,17 @@
     border: 1px solid #000;
     overflow: visible;
     position: relative;">
-    <div style="position:absolute; left: 20px; top: 10px;">
+    <div style="position:absolute; left: 20px; top: 10px;z-index: 1000;">
         <span class="legend entity">实体</span>
         <span class="legend structure">结构</span>
         <span class="legend globallogic">全局逻辑</span>
         <span class="legend viewlogic">页面逻辑</span>
         <span class="legend viewevent">页面事件</span>
         <span class="legend view">页面</span>
+        <label class="legend">
+            搜索: <input v-model="searchContent" @keydown="onkeydown" /> 
+            <span>{{ count }}</span> of <span>{{ total }}</span>
+        </label>
     </div>
         <div style="display: block;
         width: 100%; height: 100%;">
@@ -19,7 +23,8 @@
             ref="jflow"
             style="width: 100%;height: 100%;"
             :configs="configs"
-            :gen-vue-component-key="genVueComponentKey">
+            :gen-vue-component-key="genVueComponentKey"
+            :loading.sync="jflowloading">
             <template #Structure="{ source }">
                 <j-er-node-comp
                     v-if="showProperty"
@@ -74,6 +79,10 @@
                 </jBezierLink>
             </template>
         </j-jflow>
+        <div class="minimap">
+            <div class="content" ref="minimap">
+            </div>
+        </div> 
         </div>
 
         <div>
@@ -337,17 +346,23 @@ import { createRelataion } from './relation';
 // const DATA2 = createRelataion(data2);
 // const DATA3 = createRelataion(data3);
 // const DATA4 = createRelataion(data4);
+import SearchTool from './search-tool';
 export default {
     name: 'jflow-er-diagram',
     components: {
         'j-er-node-comp': erNodeComp,
         'j-plain-node': plainNode,
     },
+    provide() {
+        return {
+            recordAsIndex: this.recordAsIndex,
+        }
+    },
     data() {
         // const layout = new ERLayout({ });
         // this.curData = [];        
         return {
-            jflowloading: false,
+            jflowloading: true,
             configs: {
                 allowDrop: true,
                 layout: {},
@@ -355,10 +370,13 @@ export default {
                 minZoom: 0.0001,
                 NodeRenderTop: true,
             },
+            searchContent: '',
             filterContent: '',
             showProperty: false,
             curData: null,
             currJSON: '',
+            total: 0,
+            count: 0,
             // options: [
             //     { text: '有数', value: '1', data: Object.freeze(DATA1), },
             //     { text: '教练管理', value: '2', data: Object.freeze(DATA2) },
@@ -374,6 +392,28 @@ export default {
             return ''
         }
     },
+    watch: {
+        searchContent(content) {
+            this.searchTool.request(content);
+            this.searchTool.toggleFirstSeach(true);
+            this.total = this.searchTool.total;
+            const jflow = this.getJFlowInstance();
+            jflow.scheduleRender(() => {
+                this.count = this.searchTool.current;
+                // this.searchTool.toggleFirstSeach(false);
+            });
+
+        },
+        jflowloading(val) {
+            if(!val) {
+                const searchTool = new SearchTool();
+                searchTool.index(this.curData);
+                searchTool.registToJflow(this.getJFlowInstance());
+                this.searchTool = searchTool;
+                this.captureMap();
+            }
+        }
+    },
     // mounted() {
     //     const data = Object.freeze(createRelataion(data1));
     //     this.curData = data;
@@ -384,6 +424,35 @@ export default {
     //     }
     // },
     methods: {
+        getJFlowInstance() {
+            try {
+                return this.$refs.jflow.getInstance();
+            } catch (err) {
+                // eslint-disable-next-line no-throw-literal
+                throw 'jflow has been destroyed!';
+            }
+        },
+        onkeydown(event) {
+            
+            if(event.code === 'Enter') {
+                console.log('Enter');
+                const jflow = this.getJFlowInstance();
+                this.searchTool.next(jflow);
+                this.count = this.searchTool.current;
+                
+            }
+        },
+        captureMap() {
+            if (!this.$refs.jflow) {
+                return;
+            }
+            const jflowInstance = this.getJFlowInstance();
+            jflowInstance.captureMap(this.$refs.minimap, {
+                padding: 10,
+                placement: 'center',
+            });
+        },
+
         // onChange(event) {
         //     switch(event.target.value) {
         //         case '1':
@@ -462,8 +531,10 @@ export default {
                 this.rerender();
             } else {
                 this.configs.layout = new ERLayout(data);
+
             }
         }
     },
 };
 </script>
+
