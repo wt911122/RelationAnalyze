@@ -347,6 +347,7 @@ import { createRelataion } from './relation';
 // const DATA3 = createRelataion(data3);
 // const DATA4 = createRelataion(data4);
 import SearchTool from './search-tool';
+import MiniMapTool from './minimap-tool';
 export default {
     name: 'jflow-er-diagram',
     components: {
@@ -402,15 +403,26 @@ export default {
                 this.count = this.searchTool.current;
                 // this.searchTool.toggleFirstSeach(false);
             });
+            this.minimapTool.renderMap(jflow);
 
         },
         jflowloading(val) {
             if(!val) {
+                const jflowInstance = this.getJFlowInstance();
                 const searchTool = new SearchTool();
                 searchTool.index(this.curData);
-                searchTool.registToJflow(this.getJFlowInstance());
+                searchTool.registToJflow(jflowInstance);
                 this.searchTool = searchTool;
-                this.captureMap();
+                
+                const minimapTool = new MiniMapTool(this.$refs.minimap, {
+                    padding: 5,
+                    renderExtra(ctx) {
+                        searchTool.highlight(ctx, jflowInstance);
+                    }
+                });
+                minimapTool.registToJflow(jflowInstance);
+                minimapTool.capture(jflowInstance);
+                this.minimapTool = minimapTool;
             }
         }
     },
@@ -437,21 +449,23 @@ export default {
             if(event.code === 'Enter') {
                 console.log('Enter');
                 const jflow = this.getJFlowInstance();
-                this.searchTool.next(jflow);
+                this.searchTool.next(jflow, () => {
+                    this.minimapTool.renderMap(jflow);
+                });
                 this.count = this.searchTool.current;
-                
+               
             }
         },
-        captureMap() {
-            if (!this.$refs.jflow) {
-                return;
-            }
-            const jflowInstance = this.getJFlowInstance();
-            jflowInstance.captureMap(this.$refs.minimap, {
-                padding: 10,
-                placement: 'center',
-            });
-        },
+        // captureMap() {
+        //     if (!this.$refs.jflow) {
+        //         return;
+        //     }
+        //     const jflowInstance = this.getJFlowInstance();
+        //     jflowInstance.captureMap(this.$refs.minimap, {
+        //         padding: 0,
+        //         placement: 'center',
+        //     });
+        // },
 
         // onChange(event) {
         //     switch(event.target.value) {

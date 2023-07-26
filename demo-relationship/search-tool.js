@@ -114,7 +114,7 @@ class SearchTool {
         this._firstSearch = val;
     }
 
-    next(jflowInstance) {
+    next(jflowInstance, callback) {
         this.currIdx = ((this.currIdx + 1) % this.total);
         const m = this.result[this.currIdx];
         const renderNode = jflowInstance.getRenderNodeBySource(m.target);
@@ -152,19 +152,28 @@ class SearchTool {
                         positionEnd.x - pos.x,
                         positionEnd.y - pos.y
                     )
-                    jflowInstance._renderMap();
+                    if(callback) {
+                        callback();
+                    }
+                    // jflowInstance._renderMap();
                     anime.cancel();
                 } else {
                     const step = easeOutSine(elapsed/duration);
                     const r = step - lastStep;
                     lastStep = step;
                     jflowInstance._recalculatePosition(deltaX * r, deltaY * r);
-                    jflowInstance._renderMap();
+                    // jflowInstance._renderMap();
+                    if(callback) {
+                        callback();
+                    }
                 }
             });
             this._anime = anime;
         } else {
             jflowInstance.scheduleRender()
+            if(callback) {
+                callback();
+            }
         }
 
     }
