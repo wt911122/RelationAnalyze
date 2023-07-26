@@ -364,7 +364,7 @@ class ERLayout {
             if(nodes.length === 0) {
                 return columnpos;
             }
-            return layoutMath(nodes, columnpos) + 200
+            return layoutMath(nodes, columnpos) + 200;
         }, 0);
 
         logicNodes.forEach(logicNode => {
@@ -404,16 +404,18 @@ class ERLayout {
                     })
                 }
                 source.refByLogic.forEach(logic => {
-                    const node = logicNodes.find(node => node.source.name === logic.name);
-                    const name = node.name;
-                    if(!_nodeMap.has(name)) {
-                        _nodeMap.set(name, {
-                            node, 
-                            level: 0
-                        })
+                    const node = logicSeries.find(node => node.source.name === logic.name);
+                    if(node) {
+                        const name = node.name;
+                        if(!_nodeMap.has(name)) {
+                            _nodeMap.set(name, {
+                                node, 
+                                level: 0
+                            })
+                        }
+                        const t = _nodeMap.get(name);
+                        t.level ++;
                     }
-                    const t = _nodeMap.get(name);
-                    t.level ++;
                 });
             });
             const levelMap = {};
@@ -489,7 +491,9 @@ class ERLayout {
         leveledLogic.reverse();
         leveledLogic.forEach(level => {
             const logicNodes = levelMap[level];
-            columnspan = layoutMath(logicNodes, columnspan, null, true) + 200
+            if(logicNodes.length) {
+                columnspan = layoutMath(logicNodes, columnspan, null, true) + 200
+            }
         })
 
         // leveledLogicOtherSide.reverse();
@@ -545,6 +549,9 @@ class ERLayout {
                         lgnode.refNodes = [];
                     }
                     lgnode.refNodes.push(source);
+                    return;
+                }
+                if(structRemains.find(l => l.source === s)) {
                     return;
                 }
                 const instance = jflow.getRenderNodeBySource(s);
