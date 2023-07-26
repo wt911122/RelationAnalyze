@@ -183,7 +183,6 @@ class SearchTool {
         if(this._firstSearch) {
             this.currIdx = 0;
         }
-        console.log(this.currIdx);
         this.result.forEach((m, idx) => {
             const renderNode = jflowInstance.getRenderNodeBySource(m.target);
             const boundingRect = renderNode.getBoundingRect();

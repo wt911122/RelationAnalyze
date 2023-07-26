@@ -318,6 +318,7 @@ class ERLayout {
             columnPos = 0,
             callback,
             onlyX = false,
+            minus = false
         ) {
             let reduceHeight = 0;
             let reduceWidth = 0;
@@ -337,12 +338,21 @@ class ERLayout {
                     reduceHeight += (halfHeight + gap);
                 }
             });
-            columnPos = columnPos + reduceWidth / 2;
+            if(minus) {
+                columnPos = columnPos - reduceWidth / 2;
+            } else {
+                columnPos = columnPos + reduceWidth / 2;
+            }
+            
             nodes.forEach(n => {
                 const instance = jflow.getRenderNodeBySource(n.source);
                 instance.anchor[0]= columnPos;
             });
-            columnPos = columnPos + reduceWidth /2;
+            if(minus) {
+                columnPos = columnPos - reduceWidth / 2;
+            } else {
+                columnPos = columnPos + reduceWidth / 2;
+            }
             return columnPos
         }
 
@@ -357,40 +367,69 @@ class ERLayout {
             return layoutMath(nodes, columnpos) + 200
         }, 0);
 
-        let _nodeMap = new Map();
-        logicNodes.forEach(node => {
-            const source = node.source;
-            const name = source.name 
-            if(!_nodeMap.has(name)) {
-                _nodeMap.set(name, {
-                    node, 
-                    level: 0
-                })
+        logicNodes.forEach(logicNode => {
+            const chain = [];
+            logicNode.refByViewSide = false;
+            function iterate(node) {
+                const source = node.source;
+                if(source.refByView.length || source.refByViewEvent.length || source.refByViewLogic.length) {
+                    logicNode.refByViewSide = true;
+                    return true;
+                }
+                source.refByLogic.forEach((logic) => {
+                    if(chain.includes(logic.name)) {
+                        return;
+                    }
+                    chain.push(logic.name);
+                    const node = logicNodes.find(node => node.source.name === logic.name);
+                    iterate(node);
+                });
             }
-            source.refByLogic.forEach(logic => {
-                const node = logicNodes.find(node => node.source.name === logic.name);
-                const name = node.name;
+            iterate(logicNode);
+        });
+
+        const viewSideLogic = logicNodes.filter(n => n.refByViewSide);
+        const otherSideLogic = logicNodes.filter(n => !n.refByViewSide);
+
+        
+        function _handleLogic(logicSeries) {
+            let _nodeMap = new Map();
+            logicSeries.forEach(node => {
+                const source = node.source;
+                const name = source.name 
                 if(!_nodeMap.has(name)) {
                     _nodeMap.set(name, {
                         node, 
                         level: 0
                     })
                 }
-                const t = _nodeMap.get(name);
-                t.level ++;
+                source.refByLogic.forEach(logic => {
+                    const node = logicNodes.find(node => node.source.name === logic.name);
+                    const name = node.name;
+                    if(!_nodeMap.has(name)) {
+                        _nodeMap.set(name, {
+                            node, 
+                            level: 0
+                        })
+                    }
+                    const t = _nodeMap.get(name);
+                    t.level ++;
+                });
             });
-        });
-        const levelMap = {};
-        _nodeMap.forEach((val) => {
-            const level = val.level;
-            if(!levelMap[level]) {
-                levelMap[level] = [];
-            }
-            levelMap[level].push(val.node);
-        });
+            const levelMap = {};
+            _nodeMap.forEach((val) => {
+                const level = val.level;
+                if(!levelMap[level]) {
+                    levelMap[level] = [];
+                }
+                levelMap[level].push(val.node);
+            });
+            return levelMap;
+        }
 
-        const leveledLogic = Object.keys(levelMap).sort((a, b) => b-a);
-
+        const levelMap = _handleLogic(viewSideLogic);
+        const leveledLogic = Object.keys(levelMap).sort();
+        // console.log(leveledLogic);
  
         // const viewInnerHeight = new WeakMap();
         let reduceHeight = 0;
@@ -427,6 +466,9 @@ class ERLayout {
                 let height = 0;
                 let count = 0;
                 function reduceHeight(s) {
+                    if(otherSideLogic.find(l => l.source === s)) {
+                        return;
+                    }
                     const instance = jflow.getRenderNodeBySource(s);
                     height += instance.anchor[1];
                     count++;
@@ -442,8 +484,25 @@ class ERLayout {
                     instance.anchor[1] = height/count
                 }
             });
-            columnspan = layoutMath(logicNodes, columnspan, null, true) + 200
+            
         });
+        leveledLogic.reverse();
+        leveledLogic.forEach(level => {
+            const logicNodes = levelMap[level];
+            columnspan = layoutMath(logicNodes, columnspan, null, true) + 200
+        })
+
+        // leveledLogicOtherSide.reverse();
+        // leveledLogicOtherSide.forEach(level => {
+        //     const logicNodes = levelMap[level];
+        //     columnspan = layoutMath(logicNodes, columnspan, null, true) + 200
+        // })
+
+        // logicRemains.forEach(node => {
+        //     const source = node.source
+            
+        // })
+        
        
         const structRemains = [];
         structNodes.forEach(node => {
@@ -451,6 +510,14 @@ class ERLayout {
             let height = 0;
             let count = 0;
             function reduceHeight(s) {
+                const lgnode = otherSideLogic.find(l => l.source === s)
+                if(lgnode) {
+                    if(!lgnode.refNodes) {
+                        lgnode.refNodes = [];
+                    }
+                    lgnode.refNodes.push(source);
+                    return;
+                }
                 const instance = jflow.getRenderNodeBySource(s);
                 height += instance.anchor[1];
                 count++;
@@ -472,6 +539,14 @@ class ERLayout {
             let height = 0;
             let count = 0;
             function reduceHeight(s) {
+                const lgnode = otherSideLogic.find(l => l.source === s)
+                if(lgnode) {
+                    if(!lgnode.refNodes) {
+                        lgnode.refNodes = [];
+                    }
+                    lgnode.refNodes.push(source);
+                    return;
+                }
                 const instance = jflow.getRenderNodeBySource(s);
                 height += instance.anchor[1];
                 count++;
@@ -490,6 +565,37 @@ class ERLayout {
             }
         });
 
+
+        const levelMapOtherSide = _handleLogic(otherSideLogic);
+        const leveledLogicOtherSide = Object.keys(levelMapOtherSide).sort();
+
+        let otherSpan = -200
+        leveledLogicOtherSide.forEach(level => {
+            const logicNodes = levelMapOtherSide[level];
+            logicNodes.forEach(node => {
+                const source = node.source
+                let height = 0;
+                let count = 0;
+                function reduceHeight(s) {
+                    const instance = jflow.getRenderNodeBySource(s);
+                    height += instance.anchor[1];
+                    count++;
+                }
+                source.refByLogic.forEach(reduceHeight);
+                if(node.refNodes){
+                    node.refNodes.forEach(reduceHeight);
+                }
+                if(count === 0) {
+                    // logicRemains.push(node);
+                } else {
+                    const instance = jflow.getRenderNodeBySource(source);
+                    instance.anchor[1] = height/count
+                }
+            });
+
+            otherSpan = layoutMath(logicNodes, otherSpan, null, true, true) - 200
+            
+        });
 
 
         [
