@@ -95,7 +95,7 @@ class SearchTool {
 
     request(content) {
         if(content.trim()) {
-            this.result = this.meta.filter(({ key }) => key.includes(content));
+            this.result = this.meta.filter(({ key }) => key.toLowerCase().includes(content.toLowerCase()));
         } else {
             this.result = [];
         }
