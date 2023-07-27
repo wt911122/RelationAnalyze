@@ -1,3 +1,3 @@
 # RelationAnalyze 
 
-[RelationAnalyze](https://wt911122.github.io/RelationAnalyze/dist/)
+[RelationAnalyze](https://wt911122.github.io/RelationAnalyze)
