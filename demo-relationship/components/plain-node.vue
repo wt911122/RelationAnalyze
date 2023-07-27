@@ -1,5 +1,5 @@
 <template>
-    <j-group :source="node" 
+    <j-custom-group :source="node" 
         :configs="configs" 
         v-on="$listeners"
         @mouseenter="() => toggleLink(true)"
@@ -11,7 +11,7 @@
                 textColor,
                 content: node.name,
             }"></j-text>
-    </j-group>
+    </j-custom-group>
 </template>
 
 <script>
