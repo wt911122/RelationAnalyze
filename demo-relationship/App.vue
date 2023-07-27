@@ -24,7 +24,8 @@
             style="width: 100%;height: 100%;"
             :configs="configs"
             :gen-vue-component-key="genVueComponentKey"
-            :loading.sync="jflowloading">
+            :loading.sync="jflowloading"
+            @zoompan="onZoompan">
             <template #Structure="{ source }">
                 <j-er-node-comp
                     v-if="showProperty"
@@ -357,6 +358,7 @@ export default {
     provide() {
         return {
             recordAsIndex: this.recordAsIndex,
+            toggleLinkHighlight: this.toggleLinkHighlight,
         }
     },
     data() {
@@ -378,6 +380,7 @@ export default {
             currJSON: '',
             total: 0,
             count: 0,
+            highlightNodes: new Set(),
             // options: [
             //     { text: '有数', value: '1', data: Object.freeze(DATA1), },
             //     { text: '教练管理', value: '2', data: Object.freeze(DATA2) },
@@ -395,6 +398,10 @@ export default {
     },
     watch: {
         searchContent(content) {
+            let node = this.searchTool.currentMeta?.target;
+            if(node) {
+                this.toggleLinkHighlight(node, false);
+            }
             this.searchTool.request(content);
             this.searchTool.toggleFirstSeach(true);
             this.total = this.searchTool.total;
@@ -404,7 +411,10 @@ export default {
                 // this.searchTool.toggleFirstSeach(false);
             });
             this.minimapTool.renderMap(jflow);
-
+            node = this.searchTool.currentMeta?.target
+            if(node) {
+                this.toggleLinkHighlight(node, true, '#525FE1');
+            }
         },
         jflowloading(val) {
             if(!val) {
@@ -449,12 +459,43 @@ export default {
             if(event.code === 'Enter') {
                 console.log('Enter');
                 const jflow = this.getJFlowInstance();
+                let node = this.searchTool.currentMeta?.target;
+                if(node) {
+                    this.toggleLinkHighlight(node, false);
+                }
                 this.searchTool.next(jflow, () => {
                     this.minimapTool.renderMap(jflow);
                 });
                 this.count = this.searchTool.current;
-               
+                node = this.searchTool.currentMeta?.target;
+                if(node) {
+                    this.toggleLinkHighlight(node, true, '#525FE1');
+                }
             }
+        },
+        toggleLinkHighlight(node, val, activeColor) {
+            const jflow = this.getJFlowInstance();
+            const meta = jflow.getSourceRenderMeta(node);
+            meta.jflowFromLinks.forEach(l => {
+                l.backgroundColor = val ? activeColor: '#000'
+                l.lineWidth = val ? 5 : 1;
+            });
+            meta.jflowToLinks.forEach(l => {
+                l.backgroundColor = val ? activeColor: '#000'
+                l.lineWidth = val ? 5 : 1;
+            });
+            if(val) {
+                this.highlightNodes.add(node);
+            } else{
+                this.highlightNodes.delete(node);
+            }
+            jflow.scheduleRender();
+        },
+        onZoompan() {
+            this.highlightNodes.forEach((node) => {
+                this.toggleLinkHighlight(node, false);
+            })
+            
         },
         // captureMap() {
         //     if (!this.$refs.jflow) {

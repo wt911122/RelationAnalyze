@@ -1,13 +1,23 @@
-function createCanvas(wrapper) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const { width, height, left, top } = wrapper.getBoundingClientRect();
+export function resizeCanvas(canvas, width, height) {
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
-    canvas.style.userSelect = 'none';
     const scale = window.devicePixelRatio;
     canvas.width = Math.floor(width * scale);
     canvas.height = Math.floor(height * scale);
+    return {
+        width,
+        height,
+        raw_width: canvas.width,
+        raw_height: canvas.height,
+        scale,
+    }
+}
+
+export function createCanvas(wrapper) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // const dimension = resizeCanvas(canvas);
 
     if(wrapper) {
         wrapper.style.position = 'relative';
@@ -16,16 +26,11 @@ function createCanvas(wrapper) {
     }
     return {
         canvas,
-        width,
-        height,
-        raw_width: canvas.width,
-        raw_height: canvas.height,
-        left,
-        top,
         ctx,
-        scale,
+        // ...dimension,
     }
 }
+
 class MiniMapTool {
     miniMap = null;
     cacheMinimapCtx = null;
@@ -33,11 +38,15 @@ class MiniMapTool {
     constructor(wrapper, options = {}) {
         this.miniMap = createCanvas(wrapper);
         Object.assign(this.miniMap, options)
+    }
+
+    refreshCacheMinimapCtx() {
         const caheCanvas = document.createElement('canvas');
         caheCanvas.width = this.miniMap.raw_width;
         caheCanvas.height = this.miniMap.raw_height;
         this.cacheMinimapCtx = caheCanvas.getContext('2d');
     }
+
     registToJflow(jflowInstance) {
         jflowInstance.addEventListener('zoompan', (event) => {
             this.renderMap && this.renderMap(jflowInstance);
@@ -79,6 +88,17 @@ class MiniMapTool {
             y: p_y 
         } = jflowInstance.bounding_box;
         
+        const ratio = p_width/p_height;
+        const maxScale = 300;
+        if(ratio > 1) {
+            const h = maxScale/ratio;
+            Object.assign(this.miniMap, resizeCanvas(this.miniMap.canvas, maxScale, h))
+        } else {
+            const w = maxScale*ratio;
+            Object.assign(this.miniMap, resizeCanvas(this.miniMap.canvas, w, maxScale));
+        }
+        this.refreshCacheMinimapCtx();
+
         const { 
             width,
             height,
@@ -88,7 +108,6 @@ class MiniMapTool {
             padding,
         } = this.miniMap
         const pad2 = padding * 2;
-        const pad = padding;
         const r1 = (width - pad2) / p_width;
         const r2 = (height - pad2) / p_height;
         const r = Math.min(r1, r2);
@@ -105,19 +124,31 @@ class MiniMapTool {
         cachectx.scale(scale, scale);
         cachectx.transform(r, 0, 0, r, m_x, m_y);
 
-        const br = [0,0,0,0]
+        const br = [p_x, p_y, p_width, p_height];
+        // jflowInstance._cacheViewBox = br;
+        const beforeRender = jflowInstance._stack[0].__proto__.__proto__.beforeRender;
+        // hack一下
+        jflowInstance._stack[0].__proto__.__proto__.beforeRender = function() {return true};
+        const lineWidth = Math.min(1/r, 5);
         if(jflowInstance.NodeRenderTop) {
-            jflowInstance._linkStack.render(cachectx, (link) => { link.isInViewBox(br); return true; });
+            jflowInstance._linkStack.render(cachectx, (link) => { 
+                link.isInViewBox(br); 
+                link.lineWidth = lineWidth;
+                return true; 
+            });
             jflowInstance._stack.render(cachectx);
         } else {
             jflowInstance._stack.render(cachectx);
             jflowInstance._linkStack.render(cachectx, (link) => { link.isInViewBox(br); return true; });
         }
-
+        jflowInstance._linkStack.forEach(link => {
+            link.lineWidth = 1;
+        })
         this._cacheMapImageData = cachectx.getImageData(0, 0, raw_width, raw_height);
         Object.assign(this.miniMap, {
             m_x, m_y, r,
         })
+        jflowInstance._stack[0].__proto__.__proto__.beforeRender = beforeRender;
         this.renderMap(jflowInstance);
     }
 
@@ -131,6 +162,7 @@ class MiniMapTool {
             scale,
             ctx,
         } = this.miniMap
+        // console.log(ctx)
         ctx.save();
         ctx.setTransform();
         ctx.clearRect(0, 0, raw_width, raw_height);

@@ -1,12 +1,15 @@
 <template>
-    <j-group :source="node" :configs="configs" v-on="$listeners">
+    <j-group :source="node" 
+        :configs="configs" 
+        v-on="$listeners"
+        @mouseenter="() => toggleLink(true)"
+        @mouseleave="() => toggleLink(false)">
         <j-text
             :configs="{
-                fontSize: '16px',
+                fontSize: textSize,
                 fontWeight: 'bold',
                 textColor,
-                textAlign: 'center',
-                content: node.name
+                content: node.name,
             }"></j-text>
     </j-group>
 </template>
@@ -14,12 +17,14 @@
 <script>
 import { LinearLayout } from '@joskii/jflow';
 export default {
+    inject: ['toggleLinkHighlight'],
     props: {
         node: Object,
     },
     data() {
         let backgroundColor;
         let color;
+        let textSize = '18px';
         
         if(this.node.concept === 'entity') {
             backgroundColor = '#37371F'
@@ -44,10 +49,12 @@ export default {
         if(this.node.concept === 'view') {
             backgroundColor = '#EAEFBD'
             color = "#000"
+            textSize = "18px"
         }
         return {
             folded: false,
             textColor: color,
+            textSize,
             configs: {
                 layout: new LinearLayout({
                     direction: 'vertical',
@@ -57,10 +64,16 @@ export default {
                 backgroundColor,
                 borderWidth: 2,
                 borderRadius: 0,
-                padding: 20,
+                padding: 10,
             },
         };
     },
+    methods: {
+        toggleLink(val) {
+            console.log(val)
+            this.toggleLinkHighlight(this.node, val, '#F86F03')
+        }
+    }
 };
 </script>
 

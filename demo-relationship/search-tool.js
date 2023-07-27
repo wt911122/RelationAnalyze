@@ -110,6 +110,10 @@ class SearchTool {
         return this.currIdx + 1;
     }
 
+    get currentMeta() {
+        return this.result[this.currIdx]
+    }
+
     toggleFirstSeach(val) {
         this._firstSearch = val;
     }
