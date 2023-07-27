@@ -17,7 +17,7 @@
 <script>
 import { LinearLayout } from '@joskii/jflow';
 export default {
-    inject: ['toggleLinkHighlight'],
+    inject: ['hoverNode'],
     props: {
         node: Object,
     },
@@ -71,7 +71,7 @@ export default {
     methods: {
         toggleLink(val) {
             console.log(val)
-            this.toggleLinkHighlight(this.node, val, '#F86F03')
+            this.hoverNode(this.node, val)
         }
     }
 };

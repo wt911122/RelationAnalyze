@@ -358,7 +358,7 @@ export default {
     provide() {
         return {
             recordAsIndex: this.recordAsIndex,
-            toggleLinkHighlight: this.toggleLinkHighlight,
+            hoverNode: this.hoverNode,
         }
     },
     data() {
@@ -381,6 +381,7 @@ export default {
             total: 0,
             count: 0,
             highlightNodes: new Set(),
+            currentHoverNode: null,
             // options: [
             //     { text: '有数', value: '1', data: Object.freeze(DATA1), },
             //     { text: '教练管理', value: '2', data: Object.freeze(DATA2) },
@@ -473,6 +474,14 @@ export default {
                 }
             }
         },
+        hoverNode(node, val) {
+            if(this.currentHoverNode) {
+                this.toggleLinkHighlight(this.currentHoverNode, false);
+            }
+            this.currentHoverNode = node;
+            this.toggleLinkHighlight(node, val, '#F86F03');
+            
+        },
         toggleLinkHighlight(node, val, activeColor) {
             const jflow = this.getJFlowInstance();
             const meta = jflow.getSourceRenderMeta(node);
@@ -484,17 +493,12 @@ export default {
                 l.backgroundColor = val ? activeColor: '#000'
                 l.lineWidth = val ? 5 : 1;
             });
-            if(val) {
-                this.highlightNodes.add(node);
-            } else{
-                this.highlightNodes.delete(node);
-            }
             jflow.scheduleRender();
         },
         onZoompan() {
-            this.highlightNodes.forEach((node) => {
-                this.toggleLinkHighlight(node, false);
-            })
+            // this.highlightNodes.forEach((node) => {
+            //     this.toggleLinkHighlight(node, false);
+            // })
             
         },
         // captureMap() {
