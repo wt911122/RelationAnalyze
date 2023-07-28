@@ -1,4 +1,5 @@
 import { Property, PlainERnode } from './er-node';
+import hcluster, { traverseTree } from './hcluster/hcluster';
 import { lcapFilterEntityName, lcapFilterStructureName, lcapFilterLogicName, primaryFilter } from '../lcap-constants';
 const gap = 20;
 let id = 0;
@@ -59,6 +60,184 @@ class ERLayout {
             entities
         } = source;
 
+        const keys = [
+            'refByView',
+            'refByStructure', 
+            'refByLogic',
+            'refByViewLogic',
+            'refByViewEvent',
+        ]
+        function interateNodes(nodes){
+            nodes.forEach(node => {
+                const viewed = new Set();
+                const name = node.name;
+                function t(curr) {
+                    if(curr.concept === 'view') {
+                        if(!curr.refs) {
+                            curr.refs = [];
+                        }
+                        curr.refs.push(name)
+                    }
+                    keys.forEach(key => {
+                        if(curr[key]) {
+                            curr[key].forEach((n) => {
+                                if(viewed.has(n)) {
+                                    return;
+                                }
+                                viewed.add(n);
+                                t(n)
+                            })
+                        }
+                    })
+                }
+                t(node);
+            })
+        }
+        interateNodes(structures);
+        interateNodes(logics);
+        
+        interateNodes(entities);
+
+        
+        
+        function getDisjointArray(arr1, arr2) {
+            const disjointArr1 = arr1.filter(item => !arr2.includes(item));
+            const disjointArr2 = arr2.filter(item => !arr1.includes(item));
+            return [...disjointArr1, ...disjointArr2];
+        }
+        function getIntersectionArray(arr1, arr2) {
+            return arr1.filter(item => arr2.includes(item));
+        }
+        function similarity(s1, s2) {
+            if(s1.length === 0 && s2.length === 0) {
+                return 0
+            }
+            const a = getIntersectionArray(s1, s2).length;
+            const b = getDisjointArray(s1, s2).length;
+            if(a === 0) {
+                return 0;
+            }
+            // const l_a = s1.length;
+            // const l_b = s2.length;
+            
+            return b/a;
+        }
+        function sameArr(a, b) {
+            return (a[0] === b[0] && a[1] === b[1]) 
+                || (a[0] === b[1] && a[1] === b[0]) 
+        }
+        const matrix = [];
+        function getArraysBySimilarity(arrays) {
+            const n = arrays.length;
+            const arr = [];
+            for (let i = 0; i < n; i++) { 
+                for (let j = 0; j < n; j++) {
+                    if(i === j) continue;
+                    const s = similarity(arrays[i], arrays[j]);
+                    if(s > 0) {
+                        const t = [i, j];
+                        if(!arr.find(q => sameArr(t, q))) {
+                            arr.push([i, j, s]);
+                        }
+                        if(!matrix[i]) {
+                            matrix[i] = [];
+                        }
+                        matrix[i][j] = s;
+                    }
+                }   
+            }
+            return arr
+        }
+        const arr = getArraysBySimilarity(views.map(v => v.refs || []));
+        // console.log(arr);
+        function circus(arr) {
+            // const circus = [];
+            const t = arr.slice().sort((a,b) => a[2] - b[2]);
+            const stack = [];
+            const ks = [];
+            while(t.length) {
+                stack.push(t.shift())
+                const means = new Set();
+                while(stack.length) {
+                    const q = stack.shift();
+                    means.add(q[0])
+                    means.add(q[1]);
+                    const idx1 = t.findIndex(_t => _t.includes(q[0]));
+                    if(idx1 !== -1){
+                        stack.push(t.splice(idx1, 1)[0]);
+                    }
+                    
+                    const idx2 = t.findIndex(_t => _t.includes(q[1]));
+                    if(idx2 !== -1){
+                        stack.push(t.splice(idx2, 1)[0]);
+                    }
+                }
+                ks.push(Array.from(means));
+                
+            }
+           
+
+            // console.log(ks)
+            return ks;
+        }
+        
+        const solved = circus(arr)
+        const sortedViews = [];
+        const indexs = new Array(views.length).fill(1).map((_, idx) => idx);
+        const indexexist = [];
+        solved.forEach(mean => {
+            const data = [];
+            mean.forEach((idx) => {
+                data.push({ view: views[idx], idx });
+                indexexist.push(idx);
+            });
+            const cluster = hcluster(data, (c1, c2) => {
+                const s = matrix[c1.idx]?.[c2.idx] || matrix[c2.idx]?.[c1.idx] || Infinity;
+                return s;
+            }, 'single');
+            // console.log(cluster);
+            
+            traverseTree(cluster, (value) => {
+                sortedViews.push(value.view);
+            })
+
+            // mean.forEach((idx) => {
+            //     sortedViews.push(views[idx]);
+            //     indexexist.push(idx);
+            // })
+        });
+        // console.log(indexs);
+        // console.log(sortedViews);
+        const interindex = getDisjointArray(indexs, indexexist)
+        interindex.forEach(idx => {
+            sortedViews.push(views[idx]);
+        })
+
+        ;
+        // function sortArraysBySimilarity(arrays) {
+        //     const n = arrays.length;
+        //     const visited = new Array(n).fill(false);
+        //     for (let i = 0; i < n; i++) {  
+        //         if (visited[i]) continue;
+        //         const similar = [i];
+        //         visited[i] = true;
+        //         for (let j = i + 1; j < n; j++) {
+        //             if (visited[j]) continue;
+        //             // const sim = similarity(arrays[i], arrays[j]);
+        //             if (similarity(arrays[i], arrays[j])) {
+        //                 similar.push(j);
+        //                 visited[j] = true;
+        //             }
+        //         }
+            
+        //         sortedViews.push(similar.map(idx => views[idx]));
+        //     }
+        // }
+        
+        // sortArraysBySimilarity(views.map(v => v.refs || []));
+        // sortedViews = sortedViews.flat();
+        
+
         let structureRefFilter = new Set();
         let logicRefsAfterFilter = new Set();
         let viewRefsAfterFilter = new Set();
@@ -77,7 +256,8 @@ class ERLayout {
         let logicNodes = logics.map(i => new PlainERnode(i, 'Logic'));
         let viewEventsNodes = viewEvents.map(i => new PlainERnode(i, 'ViewEvent'));
         let viewLogicsNodes = viewLogics.map(i => new PlainERnode(i, 'ViewLogic'));
-        let viewNodes = views.map(i => new PlainERnode(i, 'View'));
+        let viewNodes = sortedViews.map(i => new PlainERnode(i, 'View'));
+        
         
       /*  if(filterContent && this.filterPart === 'View') {
             viewNodes.filter(filterByContent('View')).forEach(s => {
@@ -312,7 +492,22 @@ class ERLayout {
             viewNodes,
             // logicLevelNodes
         } = this;
-        // debugger
+
+        // viewNodes.forEach(vnode => {
+        //     const source = vnode.source
+        //     const dependencies = [];
+        //     function iterate(node) {
+
+        //     }
+        //     const logiclist = logicNodes.filter(n => n.source.refByView.includes(source));
+        //     const structlist = structNodes.filter(n => n.source.refByView.includes(source));
+        //     const entitylist = entityNodes.filter(n => n.source.refByView.includes(source));
+        //     const h = Math.max(getHeight(logiclist), getHeight(eventlist));
+        //     reduceHeight = h + gap * 2;
+        // });
+
+
+        // 
         function layoutMath(
             nodes, 
             columnPos = 0,
@@ -373,9 +568,19 @@ class ERLayout {
                             return;
                         }
                         chain.push(logic.name);
-                        const node = logicNodes.find(node => node.source.name === logic.name);
+                        const node = logicNodes.find(node => node.source === logic);
                         iterate(node);
                     });
+                    if(source.refByStructure) {
+                        source.refByStructure.forEach((struct) => {
+                            if(chain.includes(struct.name)) {
+                                return;
+                            }
+                            chain.push(struct.name);
+                            const node = structNodes.find(node => node.source === struct);
+                            iterate(node);
+                        });
+                    }
                 }
                 iterate(n);
             });
@@ -402,9 +607,9 @@ class ERLayout {
 
 
         
-        function _handleLogic(logicSeries) {
+        function _handleLevelMap(series, refs) {
             let _nodeMap = new Map();
-            logicSeries.forEach(node => {
+            series.forEach(node => {
                 const source = node.source;
                 const name = source.name 
                 if(!_nodeMap.has(name)) {
@@ -413,8 +618,8 @@ class ERLayout {
                         level: 0
                     })
                 }
-                source.refByLogic.forEach(logic => {
-                    const node = logicSeries.find(node => node.source.name === logic.name);
+                source[refs].forEach(r => {
+                    const node = series.find(node => node.source.name === r.name);
                     if(node) {
                         const name = node.name;
                         if(!_nodeMap.has(name)) {
@@ -439,7 +644,7 @@ class ERLayout {
             return levelMap;
         }
 
-        const levelMap = _handleLogic(viewSideLogic);
+        const levelMap = _handleLevelMap(viewSideLogic, 'refByLogic');
         const leveledLogic = Object.keys(levelMap).sort();
         // console.log(leveledLogic);
  
@@ -469,7 +674,6 @@ class ERLayout {
             const h = Math.max(getHeight(logiclist), getHeight(eventlist));
             reduceHeight = h + gap * 2;
         });
-
         // const logicRemains = [];
         leveledLogic.forEach(level => {
             const logicNodes = levelMap[level];
@@ -498,6 +702,46 @@ class ERLayout {
             });
             
         });
+
+        const levelStructureMap = _handleLevelMap(viewSideStructure, 'refByStructure');
+        const leveledStructure = Object.keys(levelStructureMap).sort();
+
+        leveledStructure.forEach(level => {
+            const sNodes = levelStructureMap[level];
+            sNodes.forEach(node => {
+                const source = node.source
+                let height = 0;
+                let count = 0;
+                function reduceHeight(s) {
+                    if(otherSideStructure.find(l => l.source === s)) {
+                        return;
+                    }
+                    const instance = jflow.getRenderNodeBySource(s);
+                    height += instance.anchor[1];
+                    count++;
+                }
+                source.refByStructure.forEach(reduceHeight);
+                source.refByLogic.forEach(reduceHeight);
+                source.refByView.forEach(reduceHeight);
+                source.refByViewLogic.forEach(reduceHeight)
+                source.refByViewEvent.forEach(reduceHeight);
+                if(count === 0) {
+                    // logicRemains.push(node);
+                } else {
+                    const instance = jflow.getRenderNodeBySource(source);
+                    instance.anchor[1] = height/count
+                }
+            });
+            
+        });
+        leveledStructure.reverse();
+        leveledStructure.forEach(level => {
+            const sNodes = levelStructureMap[level];
+            if(sNodes.length) {
+                columnspan = layoutMath(sNodes, columnspan, null, true) + 200
+            }
+        })
+
         leveledLogic.reverse();
         leveledLogic.forEach(level => {
             const logicNodes = levelMap[level];
@@ -507,41 +751,7 @@ class ERLayout {
         })
 
 
-
-        viewSideStructure.forEach(node => {
-            const source = node.source
-            let height = 0;
-            let count = 0;
-            function reduceHeight(s) {
-                const lgnode = otherSideLogic.find(l => l.source === s)
-                if(lgnode) {
-                    if(!lgnode.refNodes) {
-                        lgnode.refNodes = [];
-                    }
-                    lgnode.refNodes.push(source);
-                    return;
-                }
-                const instance = jflow.getRenderNodeBySource(s);
-                height += instance.anchor[1];
-                count++;
-            }
-            source.refByLogic.forEach(reduceHeight);
-            source.refByView.forEach(reduceHeight)
-            source.refByViewLogic.forEach(reduceHeight)
-            source.refByViewEvent.forEach(reduceHeight);
-            if(count === 0) {
-                
-            } else {
-                const instance = jflow.getRenderNodeBySource(source);
-                instance.anchor[1] = height/count
-            }
-        })
-
-
-        
-       
-        // const structRemains = [];
-        // structNodes.forEach(node => {
+        // viewSideStructure.forEach(node => {
         //     const source = node.source
         //     let height = 0;
         //     let count = 0;
@@ -563,12 +773,14 @@ class ERLayout {
         //     source.refByViewLogic.forEach(reduceHeight)
         //     source.refByViewEvent.forEach(reduceHeight);
         //     if(count === 0) {
-        //         structRemains.push(node);
+                
         //     } else {
         //         const instance = jflow.getRenderNodeBySource(source);
         //         instance.anchor[1] = height/count
         //     }
-        // });
+        // })
+
+
         const entityRemains = [];
         entityNodes.forEach(node => {
             const source = node.source
@@ -603,14 +815,14 @@ class ERLayout {
             if(count === 0) {
                 entityRemains.push(node);
             } else {
-                console.log(node, height, count)
+                // console.log(node, height, count)
                 const instance = jflow.getRenderNodeBySource(source);
                 instance.anchor[1] = height/count
             }
         });
 
 
-        const levelMapOtherSide = _handleLogic(otherSideLogic);
+        const levelMapOtherSide = _handleLevelMap(otherSideLogic, 'refByLogic');
         const leveledLogicOtherSide = Object.keys(levelMapOtherSide).sort();
 
         let otherSpan = -200
@@ -638,7 +850,6 @@ class ERLayout {
                 if(node.refNodes){
                     node.refNodes.forEach(reduceHeight);
                 }
-                debugger
                 if(count === 0) {
                     // logicRemains.push(node);
                 } else {

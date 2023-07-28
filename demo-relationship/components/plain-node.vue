@@ -7,7 +7,7 @@
         <j-text
             :configs="{
                 fontSize: textSize,
-                fontWeight: 'bold',
+              
                 textColor,
                 content: node.name,
             }"></j-text>

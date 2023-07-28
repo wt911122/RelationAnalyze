@@ -377,7 +377,2035 @@ export default {
             filterContent: '',
             showProperty: false,
             curData: null,
-            currJSON: '',
+            currJSON: `{
+	"entities": [
+		{
+			"entity": "app.dataSources.defaultDS.entities.Student",
+			"refByLogic": [
+				"app.logics.loadSssTableView",
+				"app.logics.loadStudentTableView"
+			],
+			"refByView": [
+				"pc",
+				"pc/sss",
+				"pc/dashboard/student"
+			],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/sss",
+					"element": "link2",
+					"event": "click"
+				},
+				{
+					"view": "pc/sss",
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"view": "pc/sss",
+					"element": "button4",
+					"event": "click"
+				},
+				{
+					"view": "pc/dashboard/student",
+					"element": "link2",
+					"event": "click"
+				},
+				{
+					"view": "pc/dashboard/student",
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"view": "pc/dashboard/student",
+					"element": "button4",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": []
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.School",
+			"refByLogic": [
+				"app.logics.loadSchoolTableView",
+				"app.logics.loadSssSelectSchool",
+				"app.logics.loadSssTableView",
+				"app.logics.loadStudentSelectSchool",
+				"app.logics.loadStudentTableView"
+			],
+			"refByView": [
+				"pc/dashboard/school"
+			],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/dashboard/school",
+					"element": "link2",
+					"event": "click"
+				},
+				{
+					"view": "pc/dashboard/school",
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"view": "pc/dashboard/school",
+					"element": "button4",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": [
+				"defaultDS"
+			]
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPLogicViewMapping",
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refBySturcture": [],
+			"refByOther": []
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPUser",
+			"refByLogic": [
+				"app.logics.LCAPGetAllUsers",
+				"app.logics.LCAPGetUserByUserId",
+				"app.logics.LCAPGetUserList",
+				"app.logics.LCAPGetUserTableView"
+			],
+			"refByView": [
+				"pc/permission_center/userManagement"
+			],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "getUsersListFromNumis"
+				},
+				{
+					"view": "pc/permission_center/userManagement",
+					"logic": "submit"
+				}
+			],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/userManagement",
+					"element": "button5",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": [
+				"defaultDS"
+			]
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPRolePerMapping",
+			"refByLogic": [
+				"app.logics.LCAPGetPermissionByRoleId",
+				"app.logics.LCAPGetResourceListByRoleId",
+				"app.logics.LCAPGetRolePermissionList",
+				"app.logics.LCAPGetScopeResourceByRoleId",
+				"app.logics.LCAPGetUserResources"
+			],
+			"refByView": [
+				"pc/permission_center/roleManagement"
+			],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uLink2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uButton6",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": []
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPPerResMapping",
+			"refByLogic": [
+				"app.logics.LCAPGetMappingByPermissionIdAndResourceId",
+				"app.logics.LCAPGetResourceListByRoleId",
+				"app.logics.LCAPGetScopeResourceByRoleId",
+				"app.logics.LCAPGetUserResources"
+			],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton4",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": []
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPUserRoleMapping",
+			"refByLogic": [
+				"app.logics.LCAPGetMappingIdByRoleIdAndUserId",
+				"app.logics.LCAPGetRoleBindUserList",
+				"app.logics.LCAPGetUserResources",
+				"app.logics.LCAPIsAlreadBindUserIdList",
+				"app.logics.LCAPLoadUserRoleMappingTableView",
+				"app.logics.LCAPRoleBindUsers",
+				"app.logics.LCAPUnBindUsers",
+				"app.logics.loadAddRoleUserTableView"
+			],
+			"refByView": [
+				"pc/permission_center/addRoleUser"
+			],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "submit"
+				},
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "modify"
+				}
+			],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"element": "uLink1",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"element": "uButton2",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": []
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPRole",
+			"refByLogic": [
+				"app.logics.LCAPIsExistRoleId",
+				"app.logics.LCAPIsRoleNameRepeated",
+				"app.logics.LCAPLoadAddRoleUserSelectLCAPRole",
+				"app.logics.LCAPLoadRoleManagementTableView",
+				"app.logics.LCAPLoadUserRoleMappingTableView",
+				"app.logics.loadAddRoleUserTableView"
+			],
+			"refByView": [
+				"pc/permission_center/roleManagement"
+			],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "modify"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "submit"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "modify"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "remove"
+				}
+			],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uButton9",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uButton6",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": [
+				"defaultDS"
+			]
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPPermission",
+			"refByLogic": [
+				"app.logics.LCAPGetPermissionByRoleId",
+				"app.logics.LCAPGetResourceListByRoleId",
+				"app.logics.LCAPGetRolePermissionList",
+				"app.logics.LCAPGetScopeResourceByRoleId",
+				"app.logics.LCAPLoadPermissionManagementTableView"
+			],
+			"refByView": [
+				"pc/permission_center/roleManagement"
+			],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "getRolePermission"
+				}
+			],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton4",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uLink2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uButton6",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": [
+				"defaultDS"
+			]
+		},
+		{
+			"entity": "app.dataSources.defaultDS.entities.LCAPResource",
+			"refByLogic": [
+				"app.logics.LCAPGetResourceListByRoleId",
+				"app.logics.LCAPGetScopeResourceByRoleId",
+				"app.logics.LCAPGetUserResources",
+				"app.logics.LCAPLoadPermissionResourceListView",
+				"app.logics.LCAPLoadResourceTableView"
+			],
+			"refByView": [
+				"pc/permission_center/resourceManagement"
+			],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"logic": "addResource"
+				},
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"logic": "loadResourceByRoleId"
+				},
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"logic": "remove"
+				}
+			],
+			"refByViewEvent": [],
+			"refBySturcture": [],
+			"refByOther": [
+				"defaultDS"
+			]
+		}
+	],
+	"logics": [
+		{
+			"name": "app.logics.loadSssTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.Student",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ student: app.dataSources.defaultDS.entities.Student, school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/sss",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.loadSssSelectSchool",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/sss",
+					"logic": "loadSelectSchool"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.logictestdebug",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "varstr"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<nasl.core.String>",
+					"name": "varlist"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/dashboard/testdebug",
+					"element": "button2",
+					"event": "click"
+				}
+			],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.loadSchoolTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.School",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/dashboard/school",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.loadStudentTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.Student",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ student: app.dataSources.defaultDS.entities.Student, school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/dashboard/student",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [
+				{
+					"view": "pc/dashboard/testvariable",
+					"element": "button1",
+					"event": "click"
+				}
+			],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.loadStudentSelectSchool",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/dashboard/student",
+					"logic": "loadSelectSchool"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetUserList",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "queryParam"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPUser: app.dataSources.defaultDS.entities.LCAPUser }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetUserByUserId",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "userId"
+				}
+			],
+			"return": [
+				{
+					"ref": "app.dataSources.defaultDS.entities.LCAPUser",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"element": "uButton2",
+					"event": "click"
+				}
+			],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetAllUsers",
+			"param": [],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPUser: app.dataSources.defaultDS.entities.LCAPUser }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "getUsersListFromNumis"
+				},
+				{
+					"view": "pc/permission_center/userManagement",
+					"logic": "getUserNameList"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetUserTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.LCAPUser",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPUser: app.dataSources.defaultDS.entities.LCAPUser }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/userManagement",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPRoleBindUsers",
+			"param": [
+				{
+					"ref": "app.structures.LCAPRoleBindUsersBody",
+					"name": "roleBindUsersBody"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "resultBindNum"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPLoadPermissionManagementTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.LCAPPermission",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPPermission: app.dataSources.defaultDS.entities.LCAPPermission }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPIsExistRoleId",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "roleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.core.Boolean",
+					"name": "result"
+				}
+			],
+			"refByLogic": [
+				"app.logics.LCAPRoleBindUsers",
+				"app.logics.LCAPUnBindUsers"
+			],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPLoadPermissionResourceListView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPResource: app.dataSources.defaultDS.entities.LCAPResource }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"logic": "loadListView"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetMappingByPermissionIdAndResourceId",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "permissionId"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "resourceId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<nasl.core.Long>",
+					"name": "mappingIdList"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton4",
+					"event": "click"
+				}
+			],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetScopeResourceByRoleId",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "roleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPRolePerMapping: app.dataSources.defaultDS.entities.LCAPRolePerMapping, lCAPPermission: app.dataSources.defaultDS.entities.LCAPPermission, lCAPPerResMapping: app.dataSources.defaultDS.entities.LCAPPerResMapping, lCAPResource: app.dataSources.defaultDS.entities.LCAPResource }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"logic": "loadResourceByRoleId"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.loadAddRoleUserTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPUserRoleMapping: app.dataSources.defaultDS.entities.LCAPUserRoleMapping, lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetRoleBindUserList",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "inputRoleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<{ lCAPUserRoleMapping: app.dataSources.defaultDS.entities.LCAPUserRoleMapping }>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [
+				"app.logics.LCAPIsAlreadBindUserIdList"
+			],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "roleAddUserReduplicate"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPLoadRoleManagementTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.LCAPRole",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPUnBindUsers",
+			"param": [
+				{
+					"ref": "app.structures.LCAPRoleBindUsersBody",
+					"name": "unBindUsersBody"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "resultUnBindUsers"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPLoadUserRoleMappingTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				},
+				{
+					"ref": "app.dataSources.defaultDS.entities.LCAPUserRoleMapping",
+					"name": "filter"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPUserRoleMapping: app.dataSources.defaultDS.entities.LCAPUserRoleMapping, lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/addRoleUser",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetRolePermissionList",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "inputRoleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPRolePerMapping: app.dataSources.defaultDS.entities.LCAPRolePerMapping, lCAPPermission: app.dataSources.defaultDS.entities.LCAPPermission }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"element": "uLink2",
+					"event": "click"
+				}
+			],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPLoadAddRoleUserSelectLCAPRole",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetUserResources",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "userId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.structures.LCAPGetResourceResult>",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": [
+				"LCAPGetResourceResult"
+			]
+		},
+		{
+			"name": "app.logics.LCAPGetPermissionByRoleId",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "roleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.dataSources.defaultDS.entities.LCAPPermission>",
+					"name": "permissionList"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "getRolePermission"
+				}
+			],
+			"refByViewEvent": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"element": "uButton4",
+					"event": "click"
+				}
+			],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetResourceListByRoleId",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "roleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.collection.List<app.dataSources.defaultDS.entities.LCAPResource>",
+					"name": "resultResourceList"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPGetMappingIdByRoleIdAndUserId",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "roleId"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "userId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "result"
+				}
+			],
+			"refByLogic": [
+				"app.logics.LCAPUnBindUsers"
+			],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPIsAlreadBindUserIdList",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "newUserId"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "inputRoleId"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.core.Boolean",
+					"name": "result"
+				}
+			],
+			"refByLogic": [
+				"app.logics.LCAPRoleBindUsers",
+				"app.logics.LCAPUnBindUsers"
+			],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPLoadResourceTableView",
+			"param": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "page"
+				},
+				{
+					"ref": "nasl.core.Long",
+					"name": "size"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "sort"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "order"
+				}
+			],
+			"return": [
+				{
+					"ref": "{ list: nasl.collection.List<{ lCAPResource: app.dataSources.defaultDS.entities.LCAPResource }>, total: nasl.core.Long }",
+					"name": "result"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/resourceManagement",
+					"logic": "load"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		},
+		{
+			"name": "app.logics.LCAPIsRoleNameRepeated",
+			"param": [
+				{
+					"ref": "nasl.core.String",
+					"name": "roleName"
+				}
+			],
+			"return": [
+				{
+					"ref": "nasl.core.Boolean",
+					"name": "isExist"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [
+				{
+					"view": "pc/permission_center/roleManagement",
+					"logic": "isRoleNameRepeated"
+				}
+			],
+			"refByViewEvent": [],
+			"refByOther": []
+		}
+	],
+	"structures": [
+		{
+			"structure": "app.structures.LCAPGetResourceResult",
+			"properties": [
+				{
+					"ref": "nasl.core.String",
+					"name": "resourceValue"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "resourceType"
+				}
+			],
+			"refByLogic": [
+				"app.logics.LCAPGetUserResources"
+			],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refBySturcture": [],
+			"refByOther": [
+				"LCAPGetResourceResult"
+			]
+		},
+		{
+			"structure": "app.structures.LCAPRoleBindUsersBody",
+			"properties": [
+				{
+					"ref": "nasl.core.Long",
+					"name": "roleId"
+				},
+				{
+					"ref": "nasl.collection.List<nasl.core.String>",
+					"name": "userIdList"
+				}
+			],
+			"refByLogic": [
+				"app.logics.LCAPRoleBindUsers",
+				"app.logics.LCAPUnBindUsers"
+			],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [],
+			"refBySturcture": [],
+			"refByOther": []
+		},
+		{
+			"structure": "app.structures.PostRequest",
+			"properties": [
+				{
+					"ref": "nasl.http.HttpResponse<nasl.core.String>",
+					"name": "response"
+				},
+				{
+					"ref": "nasl.core.String",
+					"name": "status"
+				},
+				{
+					"ref": "nasl.collection.Map<nasl.core.String,nasl.core.String>",
+					"name": "requestInfo"
+				}
+			],
+			"refByLogic": [],
+			"refByView": [],
+			"refByViewLogic": [],
+			"refByViewEvent": [
+				{
+					"view": "m",
+					"element": "m",
+					"event": "click"
+				},
+				{
+					"view": "pc",
+					"element": "pc",
+					"event": "click"
+				}
+			],
+			"refBySturcture": [],
+			"refByOther": []
+		}
+	],
+	"views": [
+		{
+			"name": "pc/sss",
+			"logics": [
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ student: app.dataSources.defaultDS.entities.Student, school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "loadSelectSchool",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				}
+			],
+			"events": [
+				{
+					"element": "sss",
+					"event": "created"
+				},
+				{
+					"element": "button2",
+					"event": "click"
+				},
+				{
+					"element": "button1",
+					"event": "click"
+				},
+				{
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"element": "button4",
+					"event": "click"
+				},
+				{
+					"element": "link1",
+					"event": "click"
+				},
+				{
+					"element": "link2",
+					"event": "click"
+				},
+				{
+					"element": "uNavbarMenuItem2",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/login",
+			"logics": [
+				{
+					"name": "onSuccess",
+					"param": [],
+					"return": []
+				}
+			],
+			"events": []
+		},
+		{
+			"name": "pc/index",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "pc/dashboard",
+			"logics": [],
+			"events": [
+				{
+					"element": "dropdown_item1",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/dashboard/testapi",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "pc/dashboard/testvariable",
+			"logics": [],
+			"events": [
+				{
+					"element": "button1",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/dashboard/testlayout",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "pc/dashboard/student",
+			"logics": [
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ student: app.dataSources.defaultDS.entities.Student, school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "loadSelectSchool",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				}
+			],
+			"events": [
+				{
+					"element": "student",
+					"event": "created"
+				},
+				{
+					"element": "button2",
+					"event": "click"
+				},
+				{
+					"element": "button1",
+					"event": "click"
+				},
+				{
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"element": "button4",
+					"event": "click"
+				},
+				{
+					"element": "link1",
+					"event": "click"
+				},
+				{
+					"element": "link2",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/dashboard/school",
+			"logics": [
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ school: app.dataSources.defaultDS.entities.School }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				}
+			],
+			"events": [
+				{
+					"element": "school",
+					"event": "created"
+				},
+				{
+					"element": "button2",
+					"event": "click"
+				},
+				{
+					"element": "button1",
+					"event": "click"
+				},
+				{
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"element": "button4",
+					"event": "click"
+				},
+				{
+					"element": "link1",
+					"event": "click"
+				},
+				{
+					"element": "link2",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/dashboard/testdebug",
+			"logics": [],
+			"events": [
+				{
+					"element": "button1",
+					"event": "click"
+				},
+				{
+					"element": "button2",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/permission_center",
+			"logics": [],
+			"events": [
+				{
+					"element": "dropdown_item1",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/permission_center/addRoleUser",
+			"logics": [
+				{
+					"name": "getRoleNameByRoleId",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "create",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "roleAddUserReduplicate",
+					"param": [
+						{
+							"ref": "nasl.core.String",
+							"name": "inputUserId"
+						},
+						{
+							"ref": "nasl.core.Long",
+							"name": "inputRoleId"
+						}
+					],
+					"return": [
+						{
+							"ref": "nasl.core.Boolean",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "submit",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "modify",
+					"param": [
+						{
+							"ref": "nasl.ui.Current<{ lCAPUserRoleMapping: app.dataSources.defaultDS.entities.LCAPUserRoleMapping, lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>",
+							"name": "current"
+						}
+					],
+					"return": []
+				},
+				{
+					"name": "getUsersListFromNumis",
+					"param": [],
+					"return": [
+						{
+							"ref": "nasl.collection.List<{ lCAPUser: app.dataSources.defaultDS.entities.LCAPUser }>",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ lCAPUserRoleMapping: app.dataSources.defaultDS.entities.LCAPUserRoleMapping, lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				}
+			],
+			"events": [
+				{
+					"element": "addRoleUser",
+					"event": "created"
+				},
+				{
+					"element": "uButton1",
+					"event": "click"
+				},
+				{
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"element": "uButton3",
+					"event": "click"
+				},
+				{
+					"element": "uLink1",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/permission_center/resourceManagement",
+			"logics": [
+				{
+					"name": "addResource",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ lCAPResource: app.dataSources.defaultDS.entities.LCAPResource }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "loadResourceByRoleId",
+					"param": [],
+					"return": [
+						{
+							"ref": "nasl.collection.List<app.dataSources.defaultDS.entities.LCAPResource>",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "remove",
+					"param": [
+						{
+							"ref": "nasl.ui.Current<{ lCAPResource: app.dataSources.defaultDS.entities.LCAPResource }>",
+							"name": "current"
+						}
+					],
+					"return": []
+				},
+				{
+					"name": "loadListView",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ lCAPResource: app.dataSources.defaultDS.entities.LCAPResource }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				}
+			],
+			"events": [
+				{
+					"element": "uButton1",
+					"event": "click"
+				},
+				{
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"element": "uButton3",
+					"event": "click"
+				},
+				{
+					"element": "uButton4",
+					"event": "click"
+				},
+				{
+					"element": "uButton5",
+					"event": "click"
+				},
+				{
+					"element": "uLink1",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/permission_center/roleManagement",
+			"logics": [
+				{
+					"name": "submit",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "getRolePermission",
+					"param": [],
+					"return": [
+						{
+							"ref": "nasl.collection.List<app.dataSources.defaultDS.entities.LCAPPermission>",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "modify",
+					"param": [
+						{
+							"ref": "nasl.ui.Current<{ lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>",
+							"name": "current"
+						}
+					],
+					"return": [
+						{
+							"ref": "nasl.core.Long",
+							"name": "resultRoleId"
+						}
+					]
+				},
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "isRoleNameRepeated",
+					"param": [
+						{
+							"ref": "nasl.core.String",
+							"name": "roleName"
+						}
+					],
+					"return": [
+						{
+							"ref": "nasl.core.Boolean",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "create",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "remove",
+					"param": [
+						{
+							"ref": "nasl.ui.Current<{ lCAPRole: app.dataSources.defaultDS.entities.LCAPRole }>",
+							"name": "current"
+						}
+					],
+					"return": []
+				}
+			],
+			"events": [
+				{
+					"element": "roleManagement",
+					"event": "created"
+				},
+				{
+					"element": "uButton1",
+					"event": "click"
+				},
+				{
+					"element": "uButton2",
+					"event": "click"
+				},
+				{
+					"element": "uButton3",
+					"event": "click"
+				},
+				{
+					"element": "uButton4",
+					"event": "click"
+				},
+				{
+					"element": "uButton5",
+					"event": "click"
+				},
+				{
+					"element": "uButton6",
+					"event": "click"
+				},
+				{
+					"element": "uButton7",
+					"event": "click"
+				},
+				{
+					"element": "uButton8",
+					"event": "click"
+				},
+				{
+					"element": "uButton9",
+					"event": "click"
+				},
+				{
+					"element": "uButton10",
+					"event": "click"
+				},
+				{
+					"element": "uLink2",
+					"event": "click"
+				},
+				{
+					"element": "uLink4",
+					"event": "click"
+				},
+				{
+					"element": "uLink5",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/permission_center/userManagement",
+			"logics": [
+				{
+					"name": "load",
+					"param": [
+						{
+							"ref": "nasl.ui.DataSourceParams",
+							"name": "params"
+						}
+					],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ lCAPUser: app.dataSources.defaultDS.entities.LCAPUser }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				},
+				{
+					"name": "submit",
+					"param": [],
+					"return": []
+				},
+				{
+					"name": "getUserNameList",
+					"param": [],
+					"return": [
+						{
+							"ref": "{ list: nasl.collection.List<{ lCAPUser: app.dataSources.defaultDS.entities.LCAPUser }>, total: nasl.core.Long }",
+							"name": "result"
+						}
+					]
+				}
+			],
+			"events": [
+				{
+					"element": "userManagement",
+					"event": "created"
+				},
+				{
+					"element": "button2",
+					"event": "click"
+				},
+				{
+					"element": "button5",
+					"event": "click"
+				},
+				{
+					"element": "button6",
+					"event": "click"
+				},
+				{
+					"element": "button1",
+					"event": "click"
+				},
+				{
+					"element": "button3",
+					"event": "click"
+				},
+				{
+					"element": "button4",
+					"event": "click"
+				},
+				{
+					"element": "link1",
+					"event": "click"
+				},
+				{
+					"element": "link2",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "pc/noAuth",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "pc/notFound",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "m/login",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "m/user",
+			"logics": [],
+			"events": [
+				{
+					"element": "logoutButton",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "m/index",
+			"logics": [],
+			"events": [
+				{
+					"element": "iconv1",
+					"event": "click"
+				}
+			]
+		},
+		{
+			"name": "m/noAuth",
+			"logics": [],
+			"events": []
+		},
+		{
+			"name": "m/notFound",
+			"logics": [],
+			"events": []
+		}
+	]
+}`,
             total: 0,
             count: 0,
             highlightNodes: new Set(),
